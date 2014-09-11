@@ -19,7 +19,7 @@
 
   function percent () {
     var desp = v('desperdicio');
-    return v('flete') + (isFinite(desp)?desp:0) * 0.01;
+    return (v('flete') + (isFinite(desp)?desp:0)) / 100;
   }
 
   function update () {
@@ -28,23 +28,19 @@
     switch ($('#tipo option:selected').attr('tipo')) {
       case 'lamina':
         val = precio /( v('alto') * v('ancho') );
-        val += val * (v('flete') + v('desperdicio')) * 0.01;
         break;
       case 'liquido':
         val = precio / v('cantidad') * v('metro');
-        val += val * v('flete') * 0.01;
         break;
       case 'paquete':
         val = precio / v('cantidad');
-        val += val * v('flete') * 0.01;
         break;
       case 'unidad':
         val = precio;
-        val += val * v('flete') * 0.01;
         break;
       case 'compuesto':
         val = 0;
-        var vincs = $('#compuesto div');
+        var vincs = $('#compuesto .vinculacion');
         vincs.each(function (i, e) {
           e = $(e);
           var lv = e.children('select').children('option:selected').attr('costo');
@@ -54,7 +50,7 @@
         });
         break;
     }
-    val += val * percent();
+    //val += val * percent();
     $('#costo').val(val);
   }
 
@@ -67,8 +63,8 @@
       section.children().attr('disabled', !value);
       section.toggle(value);
     });
-    var comp = selected == 'compuesto';
-    $('.flete').prop('disabled', comp);
+    $('.flete').attr('disabled', selected == 'compuesto');
+    $('.precio_compra').attr('disabled', selected == 'compuesto');
   }
 
   function addVinc () {
@@ -112,7 +108,7 @@
 <div id="vincbase" style="display:none;" class="vinculacion">
   <select name="vinculaciones[#id][hijo_id]" onchange="update()">
   @foreach (Material::all() as $mat)
-    <option value="{{$material->id}}" costo="{{$material->costo}}">{{$mat->nombre}}</option>
+    <option value="{{$mat->id}}" costo="{{$mat->costo}}">{{$mat->nombre}}</option>
   @endforeach
   </select>
   <input name='vinculaciones[#id][cantidad]' type='text' onkeyup="update()"> Cantidad <br>
@@ -130,7 +126,7 @@
   Categoría <br>
   {{ input('nombre', 'Nombre') }}
   {{ input('precio_compra','Precio de Compra') }}
-  {{ input('flete','% Flete', ['value' => '0']) }}
+  {{ input('flete','% Flete', ['value' => '0', 'onkeyup' => 'update()']) }}
   {{ input('costo', 'Costo', ['id' => 'costo', 'readonly' => 'readonly'] ) }}
 
   <div id="lamina">

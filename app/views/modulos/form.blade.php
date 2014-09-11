@@ -25,6 +25,9 @@
       case 'compuesto':     //si el tipo es lamina, liquido o compuesto, la seccion es m2.
         secName = 'm2';
         break;
+      case 'paquete':
+      case 'unidad':
+        secName = 'unidad'
     }
     var section = $('#tipo_'+secName).clone();   //seleccionar objeto jquery de acuerdo al nombre
     section.attr('id', 'tipo');
