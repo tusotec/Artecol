@@ -183,7 +183,9 @@
 <div id="mat" style="border:1px solid black; display: none;" style="display: none;">
   <select id="catsel" onchange="selcat(this)">
     @foreach ($mat_cat as $categoria)
-      <option value="{{$categoria->id}}" tipo="{{$categoria->tipo}}">{{$categoria->nombre}}</option>
+      @if ($categoria->materiales()->count() > 0)
+        <option value="{{$categoria->id}}" tipo="{{$categoria->tipo}}">{{$categoria->nombre}}</option>
+      @endif
     @endforeach
   </select>
   Categoria <br>
