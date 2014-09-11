@@ -90,6 +90,14 @@
     }
   }
 
+  function percent () {
+    var val = parseFloat($('.ganancia').val());
+    if (isFinite(val)) {
+      return val * 0.01;
+    }
+    return 0;
+  }
+
   function precio () {
     var val = 0;
     $('#materiales > div').each(function (i, e) {
@@ -103,6 +111,7 @@
       lval *= lmult;
       val += lval;
     });
+    val += val * percent();
     $('#precio').text(val);
   }
 </script>
