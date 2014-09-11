@@ -114,6 +114,13 @@
     val += val * percent();
     $('#precio').text(val);
   }
+
+  function isValid () {
+    var val = true;
+    val = val && count > 0;
+    val = val && isFinite($('#precio').text());
+    return val;
+  }
 </script>
 
 <?php
@@ -185,7 +192,7 @@
 </div>
 
 <h1>Crear Modulo</h1>
-{{ Form::open(['route' => 'modulos.store', 'onsubmit' => 'return count > 0;']) }}
+{{ Form::open(['route' => 'modulos.store', 'onsubmit' => 'return isValid();']) }}
   {{input('nombre','Nombre')}}
   <select name="modulo[categoria_id]">
     @foreach (ModuloCategoria::all() as $categoria)
