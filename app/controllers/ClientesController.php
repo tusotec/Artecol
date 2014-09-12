@@ -30,7 +30,9 @@ class ClientesController extends \BaseController {
 	}
 	public function show($id)
 	{
-		//
+		$cliente = Cliente::find($id);
+		$data = array('cliente' => $cliente);
+		return View::make('clientes/show')->with($data);
 	}
 	public function edit($id)
 	{

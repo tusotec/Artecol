@@ -18,7 +18,7 @@ td { border:1px solid lightgray; }
     'Apellido',
     'Identificacion',
     'Persona',
-    'Representante',
+    'Opciones',
   );
 
   $table['function'] = function ($cliente) {
@@ -27,7 +27,7 @@ td { border:1px solid lightgray; }
       $cliente->apellido,
       $cliente->identificacion,
       $cliente->personaCompleto(),
-      $cliente->representante_id,
+      link_to(route('clientes.show', $cliente->id), 'Ver'),
     );
   };
 

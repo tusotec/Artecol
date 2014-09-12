@@ -61,6 +61,7 @@ Route::group(['before' => 'normal'], function () {
   ]);
 
   Route::get('clientes', ['uses' => 'ClientesController@index', 'as' => 'clientes.index']);
+  Route::get('cliente/{id}', ['uses' => 'ClientesController@show', 'as' => 'clientes.show']);
   Route::get('clientes/new', ['uses' => 'ClientesController@create', 'as' => 'clientes.create']);
   Route::post('clientes', ['uses' => 'ClientesController@store', 'as' => 'clientes.store']);
 
