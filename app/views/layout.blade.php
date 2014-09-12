@@ -4,6 +4,22 @@
     <meta charset="utf-8">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <title>Artecol - @yield('title')</title>
+    <style type="text/css">
+      .menu_principal {
+
+      }
+      .menu_principal > li {
+        float: left;
+        display: block;
+        list-style: none;
+        width: 100px;
+      }
+      .menu_principal > li > ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+      }
+    </style>
     @yield('header')
   </head>
   <body>
@@ -49,6 +65,7 @@
             </ul>
           </li>
         </ul>
+        <div style="clear: left;"></div>
       @endif
     </nav>
 
