@@ -121,6 +121,11 @@
     val = val && isFinite($('#precio').text());
     return val;
   }
+
+  function removeMat (e) {
+    var mat = $(e).closest('.mat');
+    mat.remove();
+  }
 </script>
 
 <?php
@@ -144,6 +149,7 @@
 @stop
 
 @section ('content')
+
 <div id="mat_p_cat" style="display: none;">
   @foreach ($mat_cat as $categoria)
     <select name="material_id" id="matsel_{{$categoria->id}}">
@@ -153,6 +159,7 @@
     </select>
   @endforeach
 </div>
+
 <div id="op_p_tipo" style="display: none;">
   <div id="tipo_m2">
     Mediciones de M2!!!<br>
@@ -180,7 +187,8 @@
     {{matInput('medida_1', 'Metros')}}
   </div>
 </div>
-<div id="mat" style="border:1px solid black; display: none;" style="display: none;">
+
+<div id="mat" class="mat" style="border:1px solid black; display: none;" style="display: none;">
   <select id="catsel" onchange="selcat(this)">
     @foreach ($mat_cat as $categoria)
       @if ($categoria->materiales()->count() > 0)
@@ -190,10 +198,11 @@
   </select>
   Categoria <br>
   {{matInput('cantidad', 'Cantidad', ['value' => '1'])}}
-
+  <button type="button" onclick="removeMat(this)">Quitar</button>
 </div>
 
 <h1>Crear Modulo</h1>
+
 {{ Form::open(['route' => 'modulos.store', 'onsubmit' => 'return isValid();']) }}
   {{input('nombre','Nombre')}}
   <select name="modulo[categoria_id]">
@@ -214,4 +223,5 @@
   <button type="button" onclick="addMaterial()">Agregar Material</button>
   {{Form::submit('Aceptar')}}
 {{ Form::close() }}
+
 @stop
