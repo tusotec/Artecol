@@ -27,7 +27,8 @@ td { border:1px solid lightgray; }
       $cliente->apellido,
       $cliente->identificacion,
       $cliente->personaCompleto(),
-      link_to(route('clientes.show', $cliente->id), 'Ver'),
+      link_to(route('clientes.show', $cliente->id), 'Ver').' '.
+      link_to(route('clientes.edit', $cliente->id), 'Editar'),
     );
   };
 

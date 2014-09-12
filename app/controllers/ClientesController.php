@@ -36,11 +36,17 @@ class ClientesController extends \BaseController {
 	}
 	public function edit($id)
 	{
-		//
+		$cliente = CLiente::find($id);
+		$data = array('cliente' => $cliente);
+		return View::make('clientes/form')->with($data);
 	}
 	public function update($id)
 	{
-		//
+		$cliente = Cliente::find($id);
+		$data = Input::get('cliente');
+		$cliente->fill($data);
+		$cliente->save();
+		return Redirect::route('clientes.show', $id);
 	}
 	public function destroy($id)
 	{

@@ -64,6 +64,10 @@ Route::group(['before' => 'normal'], function () {
   Route::get('cliente/{id}', ['uses' => 'ClientesController@show', 'as' => 'clientes.show']);
   Route::get('clientes/new', ['uses' => 'ClientesController@create', 'as' => 'clientes.create']);
   Route::post('clientes', ['uses' => 'ClientesController@store', 'as' => 'clientes.store']);
+  Route::get('cliente/{id}/edit', ['uses' => 'ClientesController@edit',
+    'as' => 'clientes.edit', 'before' => 'master']);
+  Route::post('clientes/{id}', ['uses' => 'ClientesController@update',
+    'as' => 'clientes.update', 'before' => 'master']);
 
   Route::get('presupuestos', ['uses' => 'PresupuestosController@index', 'as' => 'presupuestos.index']);
   Route::get('presupuestos/new', ['uses' => 'PresupuestosController@create', 'as' => 'presupuestos.create']);
