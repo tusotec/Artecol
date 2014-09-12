@@ -37,6 +37,18 @@ td { border:1px solid lightgray; }
 
 @include ('table')
 
+<div class="buscar">
+  {{Form::open(['route' => Route::currentRouteName(), 'method' => 'get'])}}
+    <select name="searchkey">
+      <option value="nombre">Nombre</option>
+      <option value="apellido">Apellido</option>
+      <option value="identificacion">Identificacion</option>
+    </select>
+    <input type="text" name="searchvalue">
+    {{Form::submit('Buscar')}}
+  {{Form::close()}}
+</div>
+
 {{link_to(route('clientes.create'), 'Nuevo Cliente')}}
 
 @stop
