@@ -1,16 +1,30 @@
 body {
-//background-color: green;
+background-color: #CCC;
 //prueba
 }
-#header {
-height: 50px;
-background-color: red;
-}
 header {
-background-color: blue;
+background-image: url(../../images/header.png);
+background-repeat: no-repeat;
+background-position: top center;
+background-color: white;
+width: 1200px;
+margin-left: auto;
+margin-right: auto;
+
+}
+
+.form-vertical {
+text-align: left;
+}
+
+header {
+//background-color: red;
 height: 100px;
 }
 
+input, button, select, textarea {
+margin: 5px;
+}
 footer {
 background-color: blue;
 height: 100px;
@@ -21,6 +35,7 @@ margin-right: auto;
 }
 td {
 padding:5px;
+
 }
 
 th {
@@ -28,6 +43,10 @@ padding: 5px;
 background-color: ligthblue;
 
 }
+h1{
+text-align: center;
+}
+
 
 input#costo {
 border: none;
@@ -37,13 +56,16 @@ color: white;
 }
 
 #contenido{
-margin-top: 50px;
-margin-bottom: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
 margin-left: auto;
 margin-right: auto;
 width: 1200px;
 text-align: center;
+background-color:#F5F1F1;
 }
+
+.
 
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:500);
 /* 2f4b87 */

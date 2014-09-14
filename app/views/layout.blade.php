@@ -30,6 +30,7 @@
 
 <!-- scripts -->  
     <header>
+	<div id="head">
       <!-- Aqui el Header (obvio?) -->
     </header>
 	
@@ -61,7 +62,7 @@
               <li>{{link_to_route('clientes.index', 'Lista')}}</li>
               <li>{{link_to_route('clientes.create', 'Nuevo')}}</li>
             </ul>
-    </li> <li class='active has-sub'><a href='#'><span>Presupestos</span></a>
+    </li> <li class='active has-sub'><a href='#'><span>Presupuestos</span></a>
    <ul>
               <li>{{link_to_route('presupuestos.index', 'Lista')}}</li>
               <li>{{link_to_route('presupuestos.create', 'Nuevo')}}</li>
@@ -71,7 +72,9 @@
 </div>
 	
 	
-    <p>{{json_encode(Input::all())}}</p>
+  
+    <div id="contenido">
+	  <p>{{json_encode(Input::all())}}</p>
     @if ($errors->any())
       <section id="errores">
         Errores..
@@ -83,7 +86,6 @@
       </section>
     @endif
     
-    <div>
       @yield('content')
     </div>
 	
