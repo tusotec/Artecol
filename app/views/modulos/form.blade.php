@@ -31,6 +31,7 @@
         break;
       case 'paquete':
       case 'unidad':
+      case 'metro':
         secName = 'unidad'
     }
     var section = $('#tipo_'+secName).clone();   //seleccionar objeto jquery de acuerdo al nombre
