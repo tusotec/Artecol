@@ -34,6 +34,8 @@ function setform () {
 @stop
 
 @section ('content')
+
+<table class="table-bordered form-vertical"> <tr><td>
 <h1>Nuevo Cliente</h1>
 {{Form::model($cliente, ['route' => $route])}}
   <select name="cliente[persona]" onchange="setform()" id="persona">
@@ -66,4 +68,5 @@ function setform () {
   </div>
   {{Form::submit('Aceptar')}}
 {{Form::close()}}
+</td></tr></table>
 @stop

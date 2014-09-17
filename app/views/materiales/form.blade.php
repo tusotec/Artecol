@@ -124,7 +124,7 @@
   <input name='vinculaciones[#id][cantidad]' type='text' onkeyup="update()"> Cantidad <br>
   <button type="button" onclick="delVinc(this)">Quitar</button>
 </div>
-<div class="form-vertical">
+<table class="table-bordered form-vertical"> <tr><td>
 <h1>Nuevo Material</h1>
 
 {{ Form::model($material, ['route' => 'materiales.store', 'onsubmit' => 'return isValid();']) }}
@@ -168,5 +168,5 @@
 
   {{ Form::submit('Aceptar') }}
 {{ Form::close() }}
-</div>
+</td></tr></table>
 @stop
