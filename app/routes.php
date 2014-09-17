@@ -52,6 +52,13 @@ Route::group(['before' => 'normal'], function () {
   Route::get('modulos/{id}/edit', ['uses' => 'ModulosController@edit', 'as' => 'modulos.edit',
     'before' => 'admin']);
 
+  Route::get('modulos/{modulo_id}/vinc/{id}', ['uses' => 'ModulosController@vinc',
+    'as' => 'modulos.vinc', 'before' => 'admin']);
+
+  Route::post('modulos/{modulo_id}/vinc/{id}', ['uses' => 'ModulosController@vincStore',
+    'as' => 'modulos.vinc.store', 'before' => 'admin']);
+
+
   Route::get('modulos/categorias', 
     ['uses' => 'ModulosCategoriasController@index', 'as' => 'modulos_categorias.index']);
   Route::get('modulos/categorias/{id}', 

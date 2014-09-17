@@ -245,8 +245,8 @@
   {{input('profundo','Profundo')}}
   <strong>Precio: </strong><span id="precio"></span><br>
 
-  <h3>Materiales</h3>
-  @if ($modulo->exists)
+  @if (!$modulo->exists)
+    <h3>Materiales</h3>
     <div id="materiales"> </div>
     <button type="button" onclick="addMaterial()">Agregar Material</button>
   @endif

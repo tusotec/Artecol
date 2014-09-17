@@ -10,5 +10,8 @@ class ModuloVinculacion extends Eloquent {
   public function material () {
     return $this->belongsTo('Material', 'material_id');
   }
+  public function nombre () {
+    return $this->material->nombre;
+  }
 
 }

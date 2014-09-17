@@ -38,7 +38,7 @@ class ModulosController extends \BaseController {
 		$data = array();
 		$data['modulo'] = Modulo::find($id);
 		$data['mat_cat'] = MaterialCategoria::all();
-		return View::make('modulos/form')->with($data);
+		return View::make('modulos/edit')->with($data);
 	}
 	public function update($id)
 	{
@@ -47,6 +47,30 @@ class ModulosController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+	public function vinc ($modulo_id, $id) {
+		if ($id == 'new') {
+			$vinculacion = new ModuloVinculacion;
+		} else {
+			$vinculacion = ModuloVinculacion::find($id);
+		}
+		$data = array();
+		$data['vinculacion'] = $vinculacion;
+		$data['mat_cat'] = MaterialCategoria::all();
+		$data['modulo_id'] = $modulo_id;
+		return View::make('modulos/vinc')->with($data);
+	}
+	public function vincStore ($modulo_id, $id) {
+		if ($id == 'new') {
+			$vinculacion = new ModuloVinculacion;
+			$vinculacion->modulo_id = $modulo_id;
+		} else {
+			$vinculacion = ModuloVinculacion::find($id);
+		}
+		$data = Input::get('vinculacion');
+		$vinculacion->fill($data);
+		$vinculacion->save();
+		return Redirect::route('modulos.edit', $modulo_id);
 	}
 
 
