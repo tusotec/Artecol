@@ -105,6 +105,8 @@
 
 @section ('content')
 
+
+
 <div id="vincbase" style="display:none;" class="vinculacion">
   <select name="vinculaciones[#id][hijo_id]" onchange="update()">
   @foreach (Material::all() as $mat)
@@ -114,7 +116,7 @@
   <input name='vinculaciones[#id][cantidad]' type='text' onkeyup="update()"> Cantidad <br>
   <button type="button" onclick="delVinc(this)">Quitar</button>
 </div>
-
+<div class="form-vertical">
 <h1>Nuevo Material</h1>
 
 {{ Form::model($material, ['route' => 'materiales.store', 'onsubmit' => 'return isValid();']) }}
@@ -158,5 +160,5 @@
 
   {{ Form::submit('Aceptar') }}
 {{ Form::close() }}
-
+</div>
 @stop
