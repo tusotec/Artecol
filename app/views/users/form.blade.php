@@ -1,6 +1,8 @@
 @extends ('layout')
 
 @section ('content')
+
+<div class="formulario">
 <h1>Nuevo Usuario</h1>
 {{Form::open(['route' => 'users.store'])}}
   <input name="user[username]" type="text"> Nombre <br>
@@ -13,5 +15,6 @@
     @endforeach
   </select>
   {{Form::submit('Aceptar')}}
+ </div>
 {{Form::close()}}
 @stop

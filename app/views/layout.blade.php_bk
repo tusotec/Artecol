@@ -4,77 +4,72 @@
     <meta charset="utf-8">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <title>Artecol - @yield('title')</title>
-    {{ HTML::style('assets/css/bootstrap-theme.min.css') }}
-	 {{ HTML::style('assets/css/bootstrap.min.css') }}
-	 {{ HTML::style('assets/css/master.css') }}
-   
-    <!--[if lt IE 9]>
-	
-	 <!-- Bootstrap -->
+    <style type="text/css">
+      .menu_principal {
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-	
-	@yield('header')
-	
+      }
+      .menu_principal > li {
+        float: left;
+        display: block;
+        list-style: none;
+        width: 100px;
+      }
+      .menu_principal > li > ul {
+        margin: 0px;
+        padding: 0px;
+        list-style: none;
+      }
+    </style>
+    @yield('header')
   </head>
   <body>
- 
-<!-- scripts
-{{ HTML::script('assets/js/jquery.js') }} -->
-{{ HTML::script('assets/js/bootstrap.min.js') }}
-
-<!-- scripts -->  
     <header>
-	<div id="head">
       <!-- Aqui el Header (obvio?) -->
     </header>
-	
-	<div id='cssmenu'>
-<ul class="menu_principal">
-   <li class='active has-sub'><a href='#'><span>Usuarios</span></a>
-       <ul>
+    <nav>
+      @if (Auth::check())
+        <ul class="menu_principal">
+          <li>Usuarios
+            <ul>
               <li>{{link_to_route('users.index', 'Lista')}}</li>
               <li>{{link_to_route('users.create', 'Nuevo')}}</li>
               <li>{{link_to_route('users.login', 'Ingresar')}}</li>
               <li>{{link_to_route('users.logout', 'Salir')}}</li>
+              <li>{{Auth::user()->username}}</li>
             </ul>
-   <li class='active has-sub'><a href='#'><span>Materiales</span></a>
+          </li>
+          <li>Materiales
             <ul>
               <li>{{link_to_route('materiales.index', 'Lista')}}</li>
               <li>{{link_to_route('materiales.create', 'Nuevo')}}</li>
               <li>{{link_to_route('materiales_categorias.index', 'Categorias')}}</li>
             </ul>
-   </li>
-   <li class='active has-sub'><a href='#'><span>Módulos</span></a>
-                 <ul>
+          </li>
+          <li>Modulos
+            <ul>
               <li>{{link_to_route('modulos.index', 'Lista')}}</li>
               <li>{{link_to_route('modulos.create', 'Nuevo')}}</li>
               <li>{{link_to_route('modulos_categorias.index', 'Categorias')}}</li>
             </ul>
-    </li>
-	 <li class='active has-sub'><a href='#'><span>Clientes</span></a>
-     <ul>
+          </li>
+          <li>Clientes
+            <ul>
               <li>{{link_to_route('clientes.index', 'Lista')}}</li>
               <li>{{link_to_route('clientes.create', 'Nuevo')}}</li>
             </ul>
-    </li> <li class='active has-sub'><a href='#'><span>Presupuestos</span></a>
-   <ul>
+          </li>
+          <li>Presupuestos
+            <ul>
               <li>{{link_to_route('presupuestos.index', 'Lista')}}</li>
               <li>{{link_to_route('presupuestos.create', 'Nuevo')}}</li>
             </ul>
-    </li>
-</ul>
-</div>
-	
-	
-  
-    <div id="contenido">
-	  <p>{{json_encode(Input::all())}}</p>
+          </li>
+        </ul>
+        <div style="clear: left;"></div>
+      @endif
+    </nav>
+
+    <p>{{json_encode(Input::all())}}</p>
     @if ($errors->any())
       <section id="errores">
         Errores..
@@ -86,10 +81,10 @@
       </section>
     @endif
     
+    <div>
       @yield('content')
     </div>
-	
-	
+
     <footer>
       <!-- Aqui el Footer (...) -->
     </footer>
