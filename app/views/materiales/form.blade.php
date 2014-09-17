@@ -22,6 +22,14 @@
     return (v('flete') + (isFinite(desp)?desp:0)) / 100;
   }
 
+  function p (data) {
+    var val = v(data);
+    if (!isFinite(val)) {
+      return 1;
+    }
+    return (val / 100) + 1;
+  }
+
   function update () {
     var val;
     var precio = v('precio_compra');
@@ -50,8 +58,9 @@
         });
         break;
     }
-    //val += val * percent();
+    val = val * p('desperdicio') * p('flete');
     $('#costo').val(val);
+    182.7
   }
 
   function changeForm () {

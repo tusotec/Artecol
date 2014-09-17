@@ -34,7 +34,7 @@ Listando los Modulos: <br>
       $modulo->ancho,
       $modulo->profundo,
       $modulo->ganancia,
-      $modulo->precio(),
+      number_format($modulo->precio(), 2),
       $modulo->vinculaciones()->count(),
       link_to(route('modulos.edit', $modulo->id), 'Editar'),
     );

@@ -55,7 +55,7 @@
       $material->nombre,
       $material->categoria->nombre,
       $material->precio_compra,
-      $material->costo,
+      number_format($material->costo, 2),
       $material->flete,
       $material->alto,
       $material->ancho,
