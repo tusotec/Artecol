@@ -140,6 +140,10 @@
     {{input('cantidad','Litros')}}
     {{input('metro','Metro Cuadrado')}}
   </div>
+  <div id="metro">
+    <strong>Metro</strong><br>
+    {{input('cantidad','Metros')}}
+  </div>
   <div id="paquete">
     <strong>Paquete</strong><br>
     {{input('cantidad','Cantidad')}}

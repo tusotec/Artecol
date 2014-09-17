@@ -38,6 +38,7 @@ td { border:1px solid lightgray; }
         <option value="paquete">Paquete</option>
         <option value="compuesto">Compuesto</option>
         <option value="unidad">Unidad</option>
+        <option value="metro">Metros Lineales</option>
       </select>
       {{Form::submit('Crear Material')}}
     {{Form::close()}}
