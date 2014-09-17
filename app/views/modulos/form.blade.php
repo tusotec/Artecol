@@ -4,7 +4,7 @@
 <script type="text/javascript">
 
   $().ready(function () {
-    initMats();
+    //initMats();
   });
 
   var count = 0;
@@ -246,8 +246,10 @@
   <strong>Precio: </strong><span id="precio"></span><br>
 
   <h3>Materiales</h3>
-  <div id="materiales"> </div>
-  <button type="button" onclick="addMaterial()">Agregar Material</button>
+  @if ($modulo->exists)
+    <div id="materiales"> </div>
+    <button type="button" onclick="addMaterial()">Agregar Material</button>
+  @endif
   {{Form::submit('Aceptar')}}
 {{ Form::close() }}
 

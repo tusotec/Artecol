@@ -13,7 +13,7 @@
 
 
 
-Route::get('users/login', ['uses' => 'UsersController@login', 'as' => 'users.login']);
+Route::get('login', ['uses' => 'UsersController@login', 'as' => 'users.login']);
 Route::post('users/login', ['uses' => 'UsersController@attempt', 'as' => 'users.attempt']);
 Route::get('users/logout', ['uses' => 'UsersController@logout', 'as' => 'users.logout']);
 
