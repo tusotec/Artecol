@@ -10,7 +10,10 @@ class ModulosController extends \BaseController {
 	}
 	public function create()
 	{
-		return View::make('modulos/form')->with('mat_cat', MaterialCategoria::all());
+		$data = array();
+		$data['mat_cat'] = MaterialCategoria::all();
+		$data['modulo'] = new Modulo;
+		return View::make('modulos/form')->with($data);
 	}
 	public function store()
 	{
@@ -32,7 +35,10 @@ class ModulosController extends \BaseController {
 	}
 	public function edit($id)
 	{
-		//
+		$data = array();
+		$data['modulo'] = Modulo::find($id);
+		$data['mat_cat'] = MaterialCategoria::all();
+		return View::make('modulos/form')->with($data);
 	}
 	public function update($id)
 	{

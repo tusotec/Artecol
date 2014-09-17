@@ -49,6 +49,8 @@ Route::group(['before' => 'normal'], function () {
     'before' => 'admin']);
   Route::post('modulos', ['uses' => 'ModulosController@store', 'as' => 'modulos.store',
     'before' => 'admin']);
+  Route::get('modulos/{id}/edit', ['uses' => 'ModulosController@edit', 'as' => 'modulos.edit',
+    'before' => 'admin']);
 
   Route::get('modulos/categorias', 
     ['uses' => 'ModulosCategoriasController@index', 'as' => 'modulos_categorias.index']);

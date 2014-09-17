@@ -3,6 +3,10 @@
 @section ('header')
 <script type="text/javascript">
 
+  $().ready(function () {
+    initMats();
+  });
+
   var count = 0;
 
   function debug (obj) {
@@ -73,6 +77,7 @@
     mat.attr('id', 'mat_'+count);
     $('#materiales').append(mat);
     mat.find('#catsel').trigger('change');
+    return mat;
   }
 
   function m2Helper (obj) {
@@ -126,6 +131,26 @@
     var mat = $(e).closest('.mat');
     mat.remove();
   }
+
+  function initMat (mat, data) {
+    //mat.find('#catsel').val(count);
+    //alert(JSON.stringify(data));
+    searchCatWith(data['material_id']);
+  }
+
+  function searchCatWith (matId) {
+    var cats = $('#mat_p_cat .matsel').has('option[value="'+matId+'"]');
+    var catid = cats.attr('id').replace('matsel_', '');
+    console.log(catid);
+  }
+
+  function initMats () {
+    var data = {{json_encode($modulo->vinculaciones)}}
+
+    for (var vinc in data) {
+      initMat(addMaterial(), data[vinc]);
+    }
+  }
 </script>
 
 <?php
@@ -150,9 +175,11 @@
 
 @section ('content')
 
+{{ json_encode($modulo->vinculaciones) }}
+
 <div id="mat_p_cat" style="display: none;">
   @foreach ($mat_cat as $categoria)
-    <select name="material_id" id="matsel_{{$categoria->id}}">
+    <select name="material_id" id="matsel_{{$categoria->id}}" class="matsel">
       @foreach ($categoria->materiales as $material)
         <option value="{{$material->id}}" costo="{{$material->costo}}">{{$material->nombre}}</option>
       @endforeach
@@ -203,7 +230,7 @@
 
 <h1>Crear Modulo</h1>
 
-{{ Form::open(['route' => 'modulos.store', 'onsubmit' => 'return isValid();']) }}
+{{ Form::model($modulo, ['route' => 'modulos.store', 'onsubmit' => 'return isValid();']) }}
   {{input('nombre','Nombre')}}
   <select name="modulo[categoria_id]">
     @foreach (ModuloCategoria::all() as $categoria)

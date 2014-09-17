@@ -23,6 +23,7 @@ Listando los Modulos: <br>
     'Ganancia',
     'Precio',
     'Materiales',
+    'Opciones',
   );
 
   $table['function'] = function ($modulo) {
@@ -35,6 +36,7 @@ Listando los Modulos: <br>
       $modulo->ganancia,
       $modulo->precio(),
       $modulo->vinculaciones()->count(),
+      link_to(route('modulos.edit', $modulo->id), 'Editar'),
     );
   };
 
