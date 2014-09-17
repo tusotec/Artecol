@@ -60,7 +60,6 @@
     }
     val = val * p('desperdicio') * p('flete');
     $('#costo').val(val);
-    182.7
   }
 
   function changeForm () {
