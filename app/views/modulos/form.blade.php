@@ -31,8 +31,11 @@
         break;
       case 'paquete':
       case 'unidad':
-      case 'metro':
         secName = 'unidad'
+        break;
+      case 'metro':
+        secName = 'metro'
+        break;
     }
     var section = $('#tipo_'+secName).clone();   //seleccionar objeto jquery de acuerdo al nombre
     section.attr('id', 'tipo');
@@ -104,21 +107,37 @@
     return 0;
   }
 
+  function val_or_none (name, e) {
+    name = '[name*="x"]'.replace('x', name);
+    val = e.find(name).val();
+    val = parseFloat(val);
+    return val;
+  }
+
+  function val_or_one (name, e) {
+    val = val_or_none(name, e);
+    return isFinite(val) ? val : 1;
+  }
+
   function precio () {
     var val = 0;
     $('#materiales > div').each(function (i, e) {
       e = $(e);
       var mat = e.find('#matsel option:selected');
       var lval = parseFloat(mat.attr('costo'));
-      lval *= parseFloat(e.find('[name*="cantidad"]').val());
-      var lmult = e.find('[name*="medida_2"]').val();
-      lmult = (lmult==undefined) ? 1 : parseFloat(lmult);
-      lmult *= parseFloat(e.find('[name*="medida_1"]').val());
-      lval *= lmult;
+      //lval *= parseFloat(e.find('[name*="cantidad"]').val());
+      //var lmult = e.find('[name*="medida_2"]').val();
+      //lmult = (lmult==undefined) ? 1 : parseFloat(lmult);
+      //lmult *= parseFloat(e.find('[name*="medida_1"]').val());
+      //lval *= lmult;
+      lval *= val_or_none('cantidad', e);
+      lval *= val_or_one('medida_1', e);
+      lval *= val_or_one('medida_2', e);
+
       val += lval;
     });
     val += val * percent();
-    $('#precio').text(val);
+    $('#precio').text(val.toFixed(2));
   }
 
   function isValid () {
@@ -166,8 +185,9 @@
   function matInput ($name, $display, $data = array()) {
     $data['class'] = $name;
     $data['onkeyup'] = 'precio()';
+
     //$name = "material[#id][$name]";
-    return Form::text($name, null, $data) . Form::label($name, $display) . '<br>';
+    return Form::text($name, 1, $data) . Form::label($name, $display) . '<br>';
   }
 
 ?>
@@ -208,7 +228,6 @@
   </div>
   <div id="tipo_unidad">
     Mediciones de Unidad!!!<br>
-    {{matInput('medida_1', 'Cantidad')}}
   </div>
   <div id="tipo_metro">
     Mediciones de Metro!!!<br>
@@ -225,7 +244,7 @@
     @endforeach
   </select>
   Categoria <br>
-  {{matInput('cantidad', 'Cantidad', ['value' => '1'])}}
+  {{matInput('cantidad', 'Cantidad')}}
   <button type="button" onclick="removeMat(this)">Quitar</button>
 </div>
 

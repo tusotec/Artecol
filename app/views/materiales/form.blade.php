@@ -43,6 +43,9 @@
       case 'paquete':
         val = precio / v('cantidad');
         break;
+      case 'metro':
+        val = precio / v('cantidad');
+        break;
       case 'unidad':
         val = precio;
         break;
