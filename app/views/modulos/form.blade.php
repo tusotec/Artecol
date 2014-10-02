@@ -248,6 +248,7 @@
   <button type="button" onclick="removeMat(this)">Quitar</button>
 </div>
 
+<table class="table-bordered form-vertical"> <tr><td>
 <h1>Crear Modulo</h1>
 
 {{ Form::model($modulo, ['route' => 'modulos.store', 'onsubmit' => 'return isValid();']) }}
@@ -272,5 +273,5 @@
   @endif
   {{Form::submit('Aceptar')}}
 {{ Form::close() }}
-
+</td></tr></table>
 @stop

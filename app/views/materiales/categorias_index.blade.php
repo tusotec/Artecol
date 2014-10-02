@@ -27,7 +27,9 @@ td { border:1px solid lightgray; }
 </table>
 
 @if (Auth::user()->role != 'normal')
+
   <div>
+  <table class="table-bordered form-vertical"> <tr><td>
     <button onclick="$('#form').toggle()">Nueva Categoria</button>
 
     {{Form::open(['route' => 'materiales_categorias.store', 'id' => 'form', 'style' => 'display: none;'])}}
@@ -44,5 +46,6 @@ td { border:1px solid lightgray; }
     {{Form::close()}}
   </div>
 @endif
+</td></tr></table>
 
 @stop
