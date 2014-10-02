@@ -38,7 +38,7 @@ class ModulosController extends \BaseController {
 		$data = array();
 		$data['modulo'] = Modulo::find($id);
 		$data['mat_cat'] = MaterialCategoria::all();
-		return View::make('modulos/edit')->with($data);
+		return View::make('modulos/form')->with($data);
 	}
 	public function update($id)
 	{

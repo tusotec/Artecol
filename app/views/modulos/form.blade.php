@@ -4,7 +4,7 @@
 <script type="text/javascript">
 
   $().ready(function () {
-    //initMats();
+    initMats();
   });
 
   var count = 0;
@@ -107,6 +107,11 @@
     return 0;
   }
 
+  function set_val (name, e, val) {
+    name = '[name*="x"]'.replace('x', name);
+    e.find(name).val(val);
+  }
+
   function val_or_none (name, e) {
     name = '[name*="x"]'.replace('x', name);
     val = e.find(name).val();
@@ -155,19 +160,26 @@
   function initMat (mat, data) {
     //mat.find('#catsel').val(count);
     //alert(JSON.stringify(data));
-    searchCatWith(data['material_id']);
+    var cat = searchCatWith(data['material_id']);
+    mat.find('#catsel').val(cat);
+    selcat(mat.find('#catsel'));
+    mat.find('.matsel').val(data['material_id']);
+
+    mat.find()
   }
 
   function searchCatWith (matId) {
     var cats = $('#mat_p_cat .matsel').has('option[value="'+matId+'"]');
     var catid = cats.attr('id').replace('matsel_', '');
     console.log(catid);
+    return catid;
   }
 
   function initMats () {
     var data = {{json_encode($modulo->vinculaciones)}}
 
     for (var vinc in data) {
+      //alert(JSON.stringify(data[vinc]));
       initMat(addMaterial(), data[vinc]);
     }
   }
@@ -265,7 +277,7 @@
   {{input('profundo','Profundo')}}
   <strong>Precio: </strong><span id="precio"></span><br>
 
-  @if (!$modulo->exists)
+  @if (true)
     <h3>Materiales</h3>
     <div id="materiales"> </div>
     <button type="button" onclick="addMaterial()">Agregar Material</button>
