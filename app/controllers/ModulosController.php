@@ -42,7 +42,21 @@ class ModulosController extends \BaseController {
 	}
 	public function update($id)
 	{
-		//
+		$data = Input::all();
+		$modulo = Modulo::find($id);
+		$modulo->fill($data['modulo']);
+		$modulo->save();
+		foreach ($data['materiales'] as $index => $m_data) {
+			if($m_data['id'] != '') {
+				$material = ModuloVinculacion::find($m_data['id']);
+			} else {
+				$material = new ModuloVinculacion;
+			}
+			$material->fill($m_data);
+			$material->save();
+			$modulo->vinculaciones()->save($material);
+		}
+		return Redirect::route('modulos.index');
 	}
 	public function destroy($id)
 	{

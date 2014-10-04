@@ -18,12 +18,19 @@ class Modulo extends ModelBase {
     $val = 0;
     foreach ($this->vinculaciones as $vinc) {
       $lval = $vinc->material->costo;
-      $lval *= $vinc->cantidad;
-      $lval *= $vinc->medida_1 * $vinc->medida_2;
+      $lval = $this->mult($lval, $vinc->cantidad);
+      $lval = $this->mult($lval, $vinc->medida_1);
+      $lval = $this->mult($lval, $vinc->medida_2);
+      //$lval *= $vinc->medida_1 * $vinc->medida_2 * $vinc->cantidad;
       $val += $lval;
     }
     $val += $val * ($this->ganancia / 100);
     return $val;
+  }
+
+  private function mult ($v1, $v2) {
+    if ($v2==0 || $v2==null) {$v2 = 1;}
+    return $v1 * $v2;
   }
 
   public function nombreCompleto () {

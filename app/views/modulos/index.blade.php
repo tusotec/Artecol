@@ -30,9 +30,9 @@ Listando los Modulos: <br>
     return array(
       $modulo->nombre,
       $modulo->categoria->nombre,
-      $modulo->alto,
-      $modulo->ancho,
-      $modulo->profundo,
+      round($modulo->alto, 2),
+      round($modulo->ancho, 2),
+      round($modulo->profundo, 2),
       $modulo->ganancia,
       number_format($modulo->precio(), 2),
       $modulo->vinculaciones()->count(),

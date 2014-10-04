@@ -24,15 +24,6 @@ Route::group(['before' => 'normal'], function () {
     return View::make('index');
   });
 
-  Route::get('materiales', ['uses' => 'MaterialesController@index', 'as' => 'materiales.index']);
-
-  Route::get('materiales/new', ['uses' => 'MaterialesController@create', 'as' => 'materiales.create',
-    'before' => 'admin']);
-  Route::post('materiales', ['uses' => 'MaterialesController@store', 'as' => 'materiales.store',
-    'before' => 'admin']);
-  Route::delete('materiales', ['uses' => 'MaterialesController@destroy', 'as' => 'materiales.destroy',
-    'before' => 'admin']);
-
   Route::get('materiales/categorias', 
     ['uses' => 'MaterialesCategoriasController@index', 'as' => 'materiales_categorias.index']);
   Route::get('materiales/categorias/{id}', 
@@ -44,20 +35,14 @@ Route::group(['before' => 'normal'], function () {
     'before' => 'admin'
   ]);
 
-  Route::get('modulos', ['uses' => 'ModulosController@index', 'as' => 'modulos.index']);
-  Route::get('modulos/new', ['uses' => 'ModulosController@create', 'as' => 'modulos.create',
-    'before' => 'admin']);
-  Route::post('modulos', ['uses' => 'ModulosController@store', 'as' => 'modulos.store',
-    'before' => 'admin']);
-  Route::get('modulos/{id}/edit', ['uses' => 'ModulosController@edit', 'as' => 'modulos.edit',
-    'before' => 'admin']);
+  Route::get('materiales', ['uses' => 'MaterialesController@index', 'as' => 'materiales.index']);
 
-  Route::get('modulos/{modulo_id}/vinc/{id}', ['uses' => 'ModulosController@vinc',
-    'as' => 'modulos.vinc', 'before' => 'admin']);
-
-  Route::post('modulos/{modulo_id}/vinc/{id}', ['uses' => 'ModulosController@vincStore',
-    'as' => 'modulos.vinc.store', 'before' => 'admin']);
-
+  Route::get('materiales/new', ['uses' => 'MaterialesController@create', 'as' => 'materiales.create',
+    'before' => 'admin']);
+  Route::post('materiales', ['uses' => 'MaterialesController@store', 'as' => 'materiales.store',
+    'before' => 'admin']);
+  Route::delete('materiales', ['uses' => 'MaterialesController@destroy', 'as' => 'materiales.destroy',
+    'before' => 'admin']);
 
   Route::get('modulos/categorias', 
     ['uses' => 'ModulosCategoriasController@index', 'as' => 'modulos_categorias.index']);
@@ -68,6 +53,23 @@ Route::group(['before' => 'normal'], function () {
     'as' => 'modulos_categorias.store',
     'before' => 'admin'
   ]);
+
+  Route::get('modulos', ['uses' => 'ModulosController@index', 'as' => 'modulos.index']);
+  Route::get('modulos/new', ['uses' => 'ModulosController@create', 'as' => 'modulos.create',
+    'before' => 'admin']);
+  Route::post('modulos', ['uses' => 'ModulosController@store', 'as' => 'modulos.store',
+    'before' => 'admin']);
+  Route::get('modulos/{id}/edit', ['uses' => 'ModulosController@edit', 'as' => 'modulos.edit',
+    'before' => 'admin']);
+  Route::post('modulos/{id}', ['uses' => 'ModulosController@update', 'as' => 'modulos.update',
+    'before' => 'admin']);
+
+  Route::get('modulos/{modulo_id}/vinc/{id}', ['uses' => 'ModulosController@vinc',
+    'as' => 'modulos.vinc', 'before' => 'admin']);
+
+  Route::post('modulos/{modulo_id}/vinc/{id}', ['uses' => 'ModulosController@vincStore',
+    'as' => 'modulos.vinc.store', 'before' => 'admin']);
+
 
   Route::get('clientes', ['uses' => 'ClientesController@index', 'as' => 'clientes.index']);
   Route::get('cliente/{id}', ['uses' => 'ClientesController@show', 'as' => 'clientes.show']);

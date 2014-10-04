@@ -130,11 +130,6 @@
       e = $(e);
       var mat = e.find('#matsel option:selected');
       var lval = parseFloat(mat.attr('costo'));
-      //lval *= parseFloat(e.find('[name*="cantidad"]').val());
-      //var lmult = e.find('[name*="medida_2"]').val();
-      //lmult = (lmult==undefined) ? 1 : parseFloat(lmult);
-      //lmult *= parseFloat(e.find('[name*="medida_1"]').val());
-      //lval *= lmult;
       lval *= val_or_none('cantidad', e);
       lval *= val_or_one('medida_1', e);
       lval *= val_or_one('medida_2', e);
@@ -165,7 +160,10 @@
     selcat(mat.find('#catsel'));
     mat.find('.matsel').val(data['material_id']);
 
-    mat.find()
+    mat.find('.cantidad').val(data['cantidad'])
+    mat.find('.medida_1').val(data['medida_1'])
+    mat.find('.medida_2').val(data['medida_2'])
+    mat.find('.id').val(data['id'])
   }
 
   function searchCatWith (matId) {
@@ -187,11 +185,18 @@
 
 <?php
 
+  if ($modulo->exists) {
+    $form_route = ['modulos.update', $modulo->id];
+  } else {
+    $form_route = 'modulos.store';
+  }
+
   function input ($name, $display, $data = array()) {
     $data['class'] = $name;
     $data['onkeyup'] = 'precio()';
-    $name = "modulo[$name]";
-    return Form::text($name, null, $data) . Form::label($name, $display) . '<br>';
+    $value = Form::getValueAttribute($name);
+    $f_name = "modulo[$name]";
+    return Form::text($f_name, $value, $data) . Form::label($f_name, $display) . '<br>';
   }
 
   function matInput ($name, $display, $data = array()) {
@@ -207,8 +212,6 @@
 @stop
 
 @section ('content')
-
-{{ json_encode($modulo->vinculaciones) }}
 
 <div id="mat_p_cat" style="display: none;">
   @foreach ($mat_cat as $categoria)
@@ -248,6 +251,7 @@
 </div>
 
 <div id="mat" class="mat" style="border:1px solid black; display: none;" style="display: none;">
+  {{Form::hidden('id', null, ['class' => 'id'])}}
   <select id="catsel" onchange="selcat(this)">
     @foreach ($mat_cat as $categoria)
       @if ($categoria->materiales()->count() > 0)
@@ -262,11 +266,13 @@
 
 <h1>Crear Modulo</h1>
 
-{{ Form::model($modulo, ['route' => 'modulos.store', 'onsubmit' => 'return isValid();']) }}
+{{ Form::model($modulo, ['route' => $form_route, 'onsubmit' => 'return isValid();']) }}
   {{input('nombre','Nombre')}}
   <select name="modulo[categoria_id]">
     @foreach (ModuloCategoria::all() as $categoria)
-      <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+      <option value="{{$categoria->id}}" <?php
+      if($modulo->categoria == $categoria) {echo 'selected';}
+      ?> >{{$categoria->nombre}}</option>
     @endforeach
   </select> Categoria <br>
   {{input('ganancia','% Ganancia')}}
