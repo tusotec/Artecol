@@ -63,6 +63,8 @@ Route::group(['before' => 'normal'], function () {
     'before' => 'admin']);
   Route::post('modulos/{id}', ['uses' => 'ModulosController@update', 'as' => 'modulos.update',
     'before' => 'admin']);
+  Route::delete('modulos/{id}', ['uses' => 'ModulosController@destroy', 'as' => 'modulos.destroy',
+    'before' => 'admin']);
 
   Route::get('modulos/{modulo_id}/vinc/{id}', ['uses' => 'ModulosController@vinc',
     'as' => 'modulos.vinc', 'before' => 'admin']);

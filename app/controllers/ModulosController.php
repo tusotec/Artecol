@@ -60,7 +60,12 @@ class ModulosController extends \BaseController {
 	}
 	public function destroy($id)
 	{
-		//
+		$modulo = Modulo::find($id);
+		foreach ($modulo->vinculaciones as $vinculacion) {
+			$vinculacion->delete();
+		}
+		$modulo->delete();
+		return Redirect::route('modulos.index');
 	}
 	public function vinc ($modulo_id, $id) {
 		if ($id == 'new') {

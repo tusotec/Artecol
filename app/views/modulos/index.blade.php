@@ -23,7 +23,9 @@ Listando los Modulos: <br>
     'Ganancia',
     'Precio',
     'Materiales',
-    'Opciones',
+    'Detalles',
+    'Editar',
+    'Eliminar',
   );
 
   $table['function'] = function ($modulo) {
@@ -36,7 +38,11 @@ Listando los Modulos: <br>
       $modulo->ganancia,
       number_format($modulo->precio(), 2),
       $modulo->vinculaciones()->count(),
+      link_to(route('modulos.edit', $modulo->id), 'Detalles'),
       link_to(route('modulos.edit', $modulo->id), 'Editar'),
+      Form::open(['route' => ['modulos.destroy', $modulo->id],'method' => 'delete']).
+      Form::submit('Eliminar').
+      Form::close(),
     );
   };
 
