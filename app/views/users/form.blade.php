@@ -1,7 +1,7 @@
 @extends ('layout')
 
 @section ('content')
-
+<table class="table-bordered form-vertical"> <tr><td>
 <div class="formulario">
 <h1>Nuevo Usuario</h1>
 {{Form::open(['route' => 'users.store'])}}
@@ -17,4 +17,5 @@
   {{Form::submit('Aceptar')}}
  </div>
 {{Form::close()}}
+</td></tr></table>
 @stop

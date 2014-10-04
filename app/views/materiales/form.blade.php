@@ -128,7 +128,7 @@
   <button type="button" onclick="delVinc(this)">Quitar</button>
 </div>
 <table class="table-bordered form-vertical"> <tr><td>
-<h1>Nuevo Material</h1>
+<h1>Nuevo Material ELE</h1>
 
 {{ Form::model($material, ['route' => 'materiales.store', 'onsubmit' => 'return isValid();']) }}
   <select id="tipo" name="material[categoria_id]" onchange="changeForm()">
@@ -136,7 +136,7 @@
       <option value="{{$categoria->id}}" tipo="{{$categoria->tipo}}">{{$categoria->nombre}}</option>
     @endforeach
   </select>
-  Categoría <br>
+  Categoría ele <br>
   {{ input('nombre', 'Nombre') }}
   {{ input('precio_compra','Precio de Compra') }}
   {{ input('flete','% Flete', ['value' => '0', 'onkeyup' => 'update()']) }}

@@ -44,6 +44,7 @@
   <input id="m_precio" name="modulos[#id][precio]" type="text" readonly="readonly"> Precio <br>
 </div>
 
+<table class="table-bordered form-vertical"> <tr><td>
 <h1>Nuevo Presupuesto</h1>
 
 {{Form::open(['route' => 'presupuestos.store'])}}
@@ -63,5 +64,5 @@
 
   {{Form::submit('Aceptar')}}
 {{Form::close()}}
-
+</td></tr></table>
 @stop
