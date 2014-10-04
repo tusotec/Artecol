@@ -17,14 +17,10 @@ class Modulo extends ModelBase {
   public function precio () {
     $val = 0;
     foreach ($this->vinculaciones as $vinc) {
-      $lval = $vinc->material->costo;
-      $lval = $this->mult($lval, $vinc->cantidad);
-      $lval = $this->mult($lval, $vinc->medida_1);
-      $lval = $this->mult($lval, $vinc->medida_2);
-      //$lval *= $vinc->medida_1 * $vinc->medida_2 * $vinc->cantidad;
+      $lval = $vinc->precio();
       $val += $lval;
     }
-    $val += $val * ($this->ganancia / 100);
+    $val += $val * ($this->ganancia * 0.01);
     return $val;
   }
 

@@ -130,9 +130,11 @@
       e = $(e);
       var mat = e.find('#matsel option:selected');
       var lval = parseFloat(mat.attr('costo'));
+      console.log('costo: '+lval);
       lval *= val_or_none('cantidad', e);
       lval *= val_or_one('medida_1', e);
       lval *= val_or_one('medida_2', e);
+      console.log('precio total: '+lval);
 
       val += lval;
     });
@@ -180,6 +182,7 @@
       //alert(JSON.stringify(data[vinc]));
       initMat(addMaterial(), data[vinc]);
     }
+    precio();
   }
 </script>
 

@@ -38,9 +38,13 @@ Listando los Modulos: <br>
       $modulo->ganancia,
       number_format($modulo->precio(), 2),
       $modulo->vinculaciones()->count(),
-      link_to(route('modulos.edit', $modulo->id), 'Detalles'),
+      link_to(route('modulos.show', $modulo->id), 'Detalles'),
       link_to(route('modulos.edit', $modulo->id), 'Editar'),
-      Form::open(['route' => ['modulos.destroy', $modulo->id],'method' => 'delete']).
+      Form::open([
+        'route' => ['modulos.destroy', $modulo->id],
+        'method' => 'delete',
+        'onsubmit' => 'return confirm("Borrar Modulo?");'
+        ]).
       Form::submit('Eliminar').
       Form::close(),
     );

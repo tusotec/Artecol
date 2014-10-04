@@ -23,7 +23,7 @@ class ModulosController extends \BaseController {
 		$modulo->save();
 		foreach ($data['materiales'] as $index => $m_data) {
 			$material = new ModuloVinculacion;
-			$material->fill($m_data);
+			$material->validFill($m_data);
 			$material->save();
 			$modulo->vinculaciones()->save($material);
 		}
@@ -31,7 +31,9 @@ class ModulosController extends \BaseController {
 	}
 	public function show($id)
 	{
-		//
+		$data = array();
+		$data['modulo'] = Modulo::find($id);
+		return View::make('modulos/show')->with($data);
 	}
 	public function edit($id)
 	{
@@ -52,7 +54,7 @@ class ModulosController extends \BaseController {
 			} else {
 				$material = new ModuloVinculacion;
 			}
-			$material->fill($m_data);
+			$material->validFill($m_data);
 			$material->save();
 			$modulo->vinculaciones()->save($material);
 		}
