@@ -1,6 +1,7 @@
 <?php
 
 class Material extends ModelBase {
+  protected static $search_key = 'nombre';
   protected $table = 'materiales';
   protected $fillable = array(
     'nombre', 'costo', 'precio_compra', 'flete', 'descripcion',

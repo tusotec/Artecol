@@ -24,7 +24,7 @@
       <td>{{$presupuesto->id}}</td>
       <td>{{$presupuesto->fecha}}</td>
       <td>{{$presupuesto->cliente->nombre}}</td>
-      <td>{{$presupuesto->precio}}</td>
+      <td>{{precio($presupuesto->precio)}}</td>
       <td>
         <table>
           <tr>
@@ -36,7 +36,7 @@
           @foreach ($presupuesto->modulos as $modulo)
             <tr>
               <td>{{$modulo->modulo->nombre}}</td>
-              <td>{{$modulo->precio}}</td>
+              <td>{{precio($modulo->precio)}}</td>
               <td>{{$modulo->cantidad}}</td>
               <td>{{$modulo->posicion}}</td>
             </tr>

@@ -74,4 +74,11 @@
 
 {{link_to(route('materiales.create') ,'Nuevo Material')}}
 
+<div class="buscar">
+  {{Form::open(['route' => Route::currentRouteName(), 'method' => 'get'])}}
+    <input type="text" name="searchvalue">
+    {{Form::submit('Buscar')}}
+  {{Form::close()}}
+</div>
+
 @stop

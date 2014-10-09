@@ -38,16 +38,16 @@
           <td id="nombre">{{$modulo->nombre()}}</td>
           <td id="cantidad">{{$modulo->cantidad}}</td>
           <td id="posicion">{{$modulo->posicion}}</td>
-          <td id="precio">{{number_format($modulo->precio, 2)}}</td>
+          <td id="precio">{{precio($modulo->precio)}}</td>
         </tr>
       @endforeach
     </table>
   </div>
   <div id="data_inferior">
     <?php $precio = $presupuesto->precio; ?>
-    <div id="precio">Precio: {{number_format($precio, 2)}} </div>
+    <div id="precio">Precio: {{precio($precio)}} </div>
     <div id="precio_iva">Precio+IVA: 
-    {{number_format($precio + ($precio * Config::get('artecol.iva', 0) * 0.01), 2)}} </div>
+    {{precio($precio + ($precio * Config::get('artecol.iva', 0) * 0.01))}} </div>
   </div>
 </body>
 </html>
