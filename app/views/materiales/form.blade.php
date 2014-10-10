@@ -7,6 +7,8 @@
 
   $().ready(function(){
     changeForm();
+    $('input').on('keyup',update);
+    init();
   });
   //m = Material
   function m (data) {
@@ -86,6 +88,7 @@
     vinc.children('input').attr('name', 'vinculaciones['+vincNum+'][cantidad]');
     $('#compuesto').append(vinc);
     vinc.toggle(true);
+    return vinc;
   }
 
   function delVinc (obj) {
@@ -99,13 +102,34 @@
     val = val && $('#tipo option:selected').length > 0;
     return val;
   }
+
+  function init () {
+    var data = {{json_encode($material->vinculaciones)}}
+    for (var vinc in data) {
+      var m_data = data[vinc];
+      var mat = addVinc();
+      mat.find('.v-cantidad').val(m_data['cantidad']);
+      mat.find('.v-hijo').val(m_data['hijo_id']);
+      console.log(m_data);
+    }
+    update();
+  }
 </script>
 
 <?php
-  function input ($name, $display, $data = array('onkeyup' => 'update()')) {
-    if (!isset($data['value'])) {
+
+  if ($material->exists) {
+    $form_route = ['materiales.update', $material->id];
+  } else {
+    $form_route = 'materiales.store';
+  }
+
+  function input ($name, $display, $data = []) {
+    if (!isset($data['value']) || $data['value'] == null) {
       $data['value'] = "";
     }
+    $r_val = Form::getValueAttribute($name);
+    $data['value'] = ($r_val == null) ? $data['value'] : $r_val;
     $data['class'] = $name;
     $name = "material[$name]";
     return Form::text($name, $data['value'], $data) . Form::label($name, $display) . '<br>';
@@ -119,21 +143,23 @@
 
 
 <div id="vincbase" style="display:none;" class="vinculacion">
-  <select name="vinculaciones[#id][hijo_id]" onchange="update()">
+  <select name="vinculaciones[#id][hijo_id]" onchange="update()" class="v-hijo">
   @foreach (Material::all() as $mat)
     <option value="{{$mat->id}}" costo="{{$mat->costo}}">{{$mat->nombre}}</option>
   @endforeach
   </select>
-  <input name='vinculaciones[#id][cantidad]' type='text' onkeyup="update()"> Cantidad <br>
+  <input name='vinculaciones[#id][cantidad]' type='text' onkeyup="update()" class="v-cantidad"> Cantidad <br>
   <button type="button" onclick="delVinc(this)">Quitar</button>
 </div>
 <table class="table-bordered form-vertical"> <tr><td>
 <h1>Nuevo Material ELE</h1>
 
-{{ Form::model($material, ['route' => 'materiales.store', 'onsubmit' => 'return isValid();']) }}
+{{ Form::model($material, ['route' => $form_route, 'onsubmit' => 'return isValid();']) }}
   <select id="tipo" name="material[categoria_id]" onchange="changeForm()">
     @foreach (MaterialCategoria::all() as $categoria)
-      <option value="{{$categoria->id}}" tipo="{{$categoria->tipo}}">{{$categoria->nombre}}</option>
+      <option value="{{$categoria->id}}" tipo="{{$categoria->tipo}}" <?php 
+      if($material->categoria == $categoria) {echo 'selected';}
+       ?>>{{$categoria->nombre}}</option>
     @endforeach
   </select>
   Categoría ele <br>

@@ -26,8 +26,16 @@ Route::group(['before' => 'normal'], function () {
 
   Route::get('materiales/categorias', 
     ['uses' => 'MaterialesCategoriasController@index', 'as' => 'materiales_categorias.index']);
+  Route::get('materiales/categorias/new', 
+    ['uses' => 'MaterialesCategoriasController@create', 'as' => 'materiales_categorias.create']);
+  Route::get('materiales/categorias/{id}/edit', 
+    ['uses' => 'MaterialesCategoriasController@edit', 'as' => 'materiales_categorias.edit']);
   Route::get('materiales/categorias/{id}', 
     ['uses' => 'MaterialesCategoriasController@show', 'as' => 'materiales_categorias.show']);
+  Route::post('materiales/categorias/{id}', 
+    ['uses' => 'MaterialesCategoriasController@update', 'as' => 'materiales_categorias.update']);
+  Route::delete('materiales/categorias/{id}', 
+    ['uses' => 'MaterialesCategoriasController@destroy', 'as' => 'materiales_categorias.destroy']);
 
   Route::post('materiales/categorias', [
     'uses' => 'MaterialesCategoriasController@store',
@@ -36,12 +44,16 @@ Route::group(['before' => 'normal'], function () {
   ]);
 
   Route::get('materiales', ['uses' => 'MaterialesController@index', 'as' => 'materiales.index']);
-
   Route::get('materiales/new', ['uses' => 'MaterialesController@create', 'as' => 'materiales.create',
     'before' => 'admin']);
   Route::post('materiales', ['uses' => 'MaterialesController@store', 'as' => 'materiales.store',
     'before' => 'admin']);
   Route::delete('materiales', ['uses' => 'MaterialesController@destroy', 'as' => 'materiales.destroy',
+    'before' => 'admin']);
+
+  Route::get('materiales/{id}/edit', ['uses' => 'MaterialesController@edit', 'as' => 'materiales.edit',
+    'before' => 'admin']);
+  Route::post('materiales/{id}', ['uses' => 'MaterialesController@update', 'as' => 'materiales.update',
     'before' => 'admin']);
 
   Route::get('modulos/categorias', 

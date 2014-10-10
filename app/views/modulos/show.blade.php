@@ -46,8 +46,8 @@
       <td>{{$vinculacion->cantidad}}</td>
       <td>{{$vinculacion->medida_1}}</td>
       <td>{{$vinculacion->medida_2}}</td>
-      <td>{{$vinculacion->precioMaterial()}}</td>
-      <td>{{$vinculacion->precio()}}</td>
+      <td>{{precio($vinculacion->precioMaterial())}}</td>
+      <td>{{precio($vinculacion->precio())}}</td>
     </tr>
   @endforeach
 </table>

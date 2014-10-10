@@ -36,7 +36,8 @@
     'Rendimiento',
     'Desperdicio',
     'Vinculaciones',
-    'Opciones',
+    'Editar',
+    'Borrar',
   );
 
   $table['order'] = array(
@@ -54,8 +55,8 @@
     return array(
       $material->nombre,
       $material->categoria->nombre,
-      $material->precio_compra,
-      number_format($material->costo, 2),
+      precio($material->precio_compra),
+      precio($material->costo),
       $material->flete,
       $material->alto,
       $material->ancho,
@@ -63,6 +64,7 @@
       $material->rendimiento,
       $material->desperdicio,
       $material->vinculaciones()->count(),
+      link_to(route('materiales.edit', $material->id), 'Editar'),
       $boton_borrar,
     );
   };

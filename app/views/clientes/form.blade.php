@@ -44,7 +44,7 @@ function setform () {
   </select> Persona<br>
   <div id="j">
     {{input('nombre')}}
-    {{input('identificacion', 'CC')}}
+    {{input('identificacion', 'RUT')}}
     {{input('direccion')}}
     {{input('telefono', 'Teléfono')}}
     {{input('email', 'Correo Electrónico')}}
@@ -60,7 +60,7 @@ function setform () {
   <div id="n">
     {{input('nombre')}}
     {{input('apellido')}}
-    {{input('identificacion', 'RUT')}}
+    {{input('identificacion', 'CC')}}
     {{input('direccion')}}
     {{input('telefono', 'Teléfono')}}
     {{input('email', 'Correo Electrónico')}}

@@ -39,12 +39,19 @@ class MaterialesController extends \BaseController {
 
 	public function edit($id)
 	{
-		//
+		$data = array('material' => Material::find($id));
+		return View::make('materiales/form')->with($data);
 	}
 
 	public function update($id)
 	{
-		//
+		//return Input::all();
+
+		$data = Input::all();
+		$material = Material::find($id);
+		$material->fill($data['material']);
+		$material->save();
+		return Redirect::route('materiales.index');
 	}
 
 	public function destroy()
