@@ -14,9 +14,14 @@
       border: 1px solid lightgray;
       border-collapse: collapse;
     }
+    #encabezado {
+      background-color: red;
+      height: 50px;
+    }
   </style>
 </head>
 <body>
+<div id="encabezado"></div>
   <div id="data_superior">
     <div id="id">ID: {{$presupuesto->id}}</div>
     <div id="fecha">Fecha: {{$presupuesto->fecha}}</div>

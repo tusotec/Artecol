@@ -34,7 +34,11 @@ class PresupuestosController extends \BaseController {
 	{
 		$presupuesto = Presupuesto::find($id);
 		$data = array('presupuesto' => $presupuesto);
-		return View::make('presupuestos/show')->with($data);
+		//return View::make('presupuestos/show')->with($data);
+
+    $pdf = App::make('dompdf');
+    $pdf->loadHTML(View::make('presupuestos/show')->with($data));
+    return $pdf->stream();
 	}
 	public function edit($id)
 	{
