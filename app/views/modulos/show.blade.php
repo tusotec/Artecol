@@ -27,6 +27,14 @@
     <th>Ganancia:</th>
     <td>{{$modulo->ganancia}}%</td>
   </tr>
+  <tr>
+    <th>Medicion:</th>
+    <td>{{$modulo->medicion}}</td>
+  </tr>
+  <tr>
+    <th>Precio Unitario:</th>
+    <td>{{$modulo->precioUnitario()}}</td>
+  </tr>
 </table>
 <h3>Materiales</h3>
 <table id="materiales">

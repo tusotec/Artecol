@@ -9,6 +9,11 @@
       padding: 5px;
       border: 1px solid;
     }
+    table, td, th {
+      padding: 5px;
+      border: 1px solid lightgray;
+      border-collapse: collapse;
+    }
   </style>
 </head>
 <body>
@@ -30,6 +35,7 @@
         <th id="cantidad">Cantidad</th>
         <th id="posicion">Posicion(es)</th>
         <th id="precio">Precio</th>
+        <th id="medidas" colspan="3">Medidas</th>
       </tr>
       <?php $cuenta = 0; ?>
       @foreach ($presupuesto->modulos as $modulo)
@@ -39,6 +45,9 @@
           <td id="cantidad">{{$modulo->cantidad}}</td>
           <td id="posicion">{{$modulo->posicion}}</td>
           <td id="precio">{{precio($modulo->precio)}}</td>
+          <td id="alto">{{$modulo->alto}}</td>
+          <td id="ancho">{{$modulo->ancho}}</td>
+          <td id="profundo">{{$modulo->profundo}}</td>
         </tr>
       @endforeach
     </table>

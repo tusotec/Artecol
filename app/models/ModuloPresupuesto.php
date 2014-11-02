@@ -3,7 +3,7 @@
 class ModuloPresupuesto extends Eloquent {
   protected $table = 'modulos_presupuestos';
   protected $fillable = array(
-    'precio', 'cantidad', 'modulo_id', 'posicion'
+    'precio', 'cantidad', 'modulo_id', 'posicion', 'alto', 'ancho','profundo'
   );
 
   public function modulo () {

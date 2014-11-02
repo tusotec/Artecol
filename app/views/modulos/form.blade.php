@@ -210,6 +210,14 @@
     return Form::text($name, 1, $data) . Form::label($name, $display) . '<br>';
   }
 
+  $mediciones = array(
+    "Fijo" => "fijo",
+    "Ancho" => "ancho",
+    "Ancho - Alto" => "ancho-alto",
+    "Ancho - Profundo" => "ancho-profundo",
+    "Metro Cubico" => "m3"
+  );
+
 ?>
 
 @stop
@@ -279,6 +287,13 @@
       ?> >{{$categoria->nombre}}</option>
     @endforeach
   </select> Categoria <br>
+  <select name="modulo[medicion]">
+    @foreach ($mediciones as $key => $value)
+      <option value="{{$value}}" <?php
+      if($modulo->medicion == $value) {echo 'selected';}
+      ?> >{{$key}}</option>
+    @endforeach
+  </select> Medicion <br>
   {{input('ganancia','% Ganancia')}}
 
 
