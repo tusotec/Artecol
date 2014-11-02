@@ -22,12 +22,15 @@
     $table['order'] = array();
   }
   $t_route_name = Route::currentRouteName();
+
  ?>
 
 <table>
   <tr>
     @foreach ($table['names'] as $column_name)
-      @if (isset($table['order'][$column_name]))
+      @if (is_array($column_name))
+        <th colspan="{{$column_name[1]}}">{{$column_name[0]}}</th>
+      @elseif (isset($table['order'][$column_name]))
         <?php $t_r_data = ['order' => $table['order'][$column_name]]; ?>
         <th>{{link_to(route($t_route_name, $t_r_data), $column_name)}}</th>
       @else

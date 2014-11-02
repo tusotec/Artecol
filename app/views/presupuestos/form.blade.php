@@ -28,6 +28,7 @@
     val *= getMedida(parent, 'alto');
     val *= getMedida(parent, 'ancho');
     val *= getMedida(parent, 'profundo');
+    val = Math.round(val);
     parent.find('#m_precio').val(val);
 
     var precio = 0;

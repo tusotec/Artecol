@@ -17,15 +17,12 @@ Listando los Modulos: <br>
   $table['names'] = array(
     'Nombre',
     'Categoria',
-    'Alto',
-    'Ancho',
-    'Profundo',
-    'Ganancia',
+    ['Medidas', 3],
     'Precio',
+    'Precio Unitario',
+    'Medicion',
     'Materiales',
-    'Detalles',
-    'Editar',
-    'Eliminar',
+    ['Opciones', 3]
   );
 
   $table['function'] = function ($modulo) {
@@ -35,8 +32,9 @@ Listando los Modulos: <br>
       round($modulo->alto, 2),
       round($modulo->ancho, 2),
       round($modulo->profundo, 2),
-      $modulo->ganancia,
       number_format($modulo->precio(), 2),
+      number_format($modulo->precioUnitario(), 2),
+      $modulo->medicion,
       $modulo->vinculaciones()->count(),
       link_to(route('modulos.show', $modulo->id), 'Detalles'),
       link_to(route('modulos.edit', $modulo->id), 'Editar'),
