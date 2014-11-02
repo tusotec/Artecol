@@ -84,21 +84,6 @@
     return mat;
   }
 
-  function m2Helper (obj) {
-    obj = $(obj);
-    var parent = obj.parent();
-    var name = obj.attr('mn').replace('sel', 'medida_');
-    var sel = obj.find('option:selected');
-    var medida = parent.find('[name*="' + name + '"]');
-    if (sel.val() == 'personalizado') {
-      medida.attr('readonly', false);
-    } else {
-      medida.attr('readonly', true);
-      var val = parseFloat($('[name="' + sel.val() + '"]').val());
-      medida.val(val);
-    }
-  }
-
   function percent () {
     var val = parseFloat($('.ganancia').val());
     if (isFinite(val)) {
@@ -236,32 +221,17 @@
 
 <div id="op_p_tipo" style="display: none;">
   <div id="tipo_m2">
-    Mediciones de M2!!!<br>
-    <select mn="sel1" onchange="m2Helper(this)">
-      <option value="modulo[alto]">Alto</option>
-      <option value="modulo[ancho]">Ancho</option>
-      <option value="modulo[profundo]">Profundo</option>
-      <option value="personalizado" selected="selected">Personalizado</option>
-    </select>
     {{matInput('medida_1', 'Alto')}}
-    <select mn="sel2" onchange="m2Helper(this)">
-      <option value="modulo[alto]">Alto</option>
-      <option value="modulo[ancho]">Ancho</option>
-      <option value="modulo[profundo]">Profundo</option>
-      <option value="personalizado" selected="selected">Personalizado</option>
-    </select>
     {{matInput('medida_2', 'Ancho')}}
   </div>
   <div id="tipo_unidad">
-    Mediciones de Unidad!!!<br>
   </div>
   <div id="tipo_metro">
-    Mediciones de Metro!!!<br>
     {{matInput('medida_1', 'Metros')}}
   </div>
 </div>
 
-<div id="mat" class="mat" style="border:1px solid black; display: none;" style="display: none;">
+<div id="mat" class="mat" style="border:1px solid lightgray; display: none;" style="display: none;">
   {{Form::hidden('id', null, ['class' => 'id'])}}
   <select id="catsel" onchange="selcat(this)">
     @foreach ($mat_cat as $categoria)
