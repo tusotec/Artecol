@@ -40,7 +40,7 @@
         val = precio /( v('alto') * v('ancho') );
         break;
       case 'liquido':
-        val = precio / v('cantidad') * v('metro');
+        val = ( precio / v('cantidad') )/ v('metro');
         break;
       case 'paquete':
         val = precio / v('cantidad');
@@ -63,7 +63,7 @@
         });
         break;
     }
-    val = val * p('desperdicio') * p('flete');
+    val = (val * p('desperdicio'))* p('flete');
     $('#costo').val(val);
   }
 
