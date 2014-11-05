@@ -51,13 +51,15 @@
   }
 
   function selcat (obj) {
-    obj = $(obj).parent();
+    obj = $(obj).closest('.mat');
     var selected = selectedCategory(obj);      //categoria seleccionada.
     var matsel = catMats(selected['value']);   //lista de materiales de la categoria.
     var tipo = selTipo(selected['tipo']);      //seleccionar la seccion de detalles asociada al tipo de categoria
 
-    obj.children('#matsel').remove();
-    obj.append(matsel);       //remplazar la lista de materiales
+    var gen = obj.find('.general-fields');
+
+    gen.children('#matsel').remove();
+    gen.append(matsel);       //remplazar la lista de materiales
 
     obj.children('#tipo').remove();
     obj.append(tipo);         //remplazar la seccion de detalles
@@ -171,6 +173,12 @@
   }
 </script>
 
+<style type="text/css">
+  .mat {
+    padding: 5px;
+  }
+</style>
+
 <?php
 
   if ($modulo->exists) {
@@ -184,7 +192,10 @@
     $data['onkeyup'] = 'precio()';
     $value = Form::getValueAttribute($name);
     $f_name = "modulo[$name]";
-    return Form::text($f_name, $value, $data) . Form::label($f_name, $display) . '<br>';
+    return  '<div class="input-field">' .
+            Form::label($f_name, $display) .
+            Form::text($f_name, $value, $data) .
+            '</div>';
   }
 
   function matInput ($name, $display, $data = array()) {
@@ -192,7 +203,10 @@
     $data['onkeyup'] = 'precio()';
 
     //$name = "material[#id][$name]";
-    return Form::text($name, 1, $data) . Form::label($name, $display) . '<br>';
+    return  '<div class="input-field">' .
+            Form::label($name, $display) .
+            Form::text($name, 1, $data) .
+            '</div>';
   }
 
   $mediciones = array(
@@ -220,57 +234,70 @@
 </div>
 
 <div id="op_p_tipo" style="display: none;">
-  <div id="tipo_m2">
+  <div id="tipo_m2" class="input-row">
     {{matInput('medida_1', 'Alto')}}
     {{matInput('medida_2', 'Ancho')}}
   </div>
-  <div id="tipo_unidad">
+  <div id="tipo_unidad" class="input-row">
   </div>
-  <div id="tipo_metro">
+  <div id="tipo_metro" class="input-row">
     {{matInput('medida_1', 'Metros')}}
   </div>
 </div>
 
 <div id="mat" class="mat" style="border:1px solid lightgray; display: none;" style="display: none;">
   {{Form::hidden('id', null, ['class' => 'id'])}}
-  <select id="catsel" onchange="selcat(this)">
-    @foreach ($mat_cat as $categoria)
-      @if ($categoria->materiales()->count() > 0)
-        <option value="{{$categoria->id}}" tipo="{{$categoria->tipo}}">{{$categoria->nombre}}</option>
-      @endif
-    @endforeach
-  </select>
-  Categoria <br>
-  {{matInput('cantidad', 'Cantidad')}}
-  <button type="button" onclick="removeMat(this)">Quitar</button>
+  <div class="input-row general-fields">
+    <div class="input-field">
+      <select id="catsel" onchange="selcat(this)">
+        @foreach ($mat_cat as $categoria)
+          @if ($categoria->materiales()->count() > 0)
+            <option value="{{$categoria->id}}" tipo="{{$categoria->tipo}}">{{$categoria->nombre}}</option>
+          @endif
+        @endforeach
+      </select>
+    </div>
+    {{matInput('cantidad', 'Cantidad')}}
+    <button type="button" onclick="removeMat(this)">Quitar</button>
+  </div>
 </div>
 
 <table class="table-bordered form-vertical"> <tr><td>
 <h1>Crear Modulo</h1>
 
 {{ Form::model($modulo, ['route' => $form_route, 'onsubmit' => 'return isValid();']) }}
-  {{input('nombre','Nombre')}}
-  <select name="modulo[categoria_id]">
-    @foreach (ModuloCategoria::all() as $categoria)
-      <option value="{{$categoria->id}}" <?php
-      if($modulo->categoria == $categoria) {echo 'selected';}
-      ?> >{{$categoria->nombre}}</option>
-    @endforeach
-  </select> Categoria <br>
-  <select name="modulo[medicion]">
-    @foreach ($mediciones as $key => $value)
-      <option value="{{$value}}" <?php
-      if($modulo->medicion == $value) {echo 'selected';}
-      ?> >{{$key}}</option>
-    @endforeach
-  </select> Medicion <br>
-  {{input('ganancia','% Ganancia')}}
+  <div class="input-row">
+    {{input('nombre','Nombre')}}
+    <div class="input-field">
+      <select name="modulo[categoria_id]">
+        @foreach (ModuloCategoria::all() as $categoria)
+          <option value="{{$categoria->id}}" <?php
+          if($modulo->categoria == $categoria) {echo 'selected';}
+          ?> >{{$categoria->nombre}}</option>
+        @endforeach
+      </select> Categoria
+    </div>
+    <div class="input-field">
+      <select name="modulo[medicion]">
+        @foreach ($mediciones as $key => $value)
+          <option value="{{$value}}" <?php
+          if($modulo->medicion == $value) {echo 'selected';}
+          ?> >{{$key}}</option>
+        @endforeach
+      </select> Medicion
+    </div>
+    <div class="input-field">
+      <strong>Precio: </strong><span id="precio"></span><br>
+    </div>
+  </div>
 
+  <div class="input-row">
+    {{input('ganancia','% Ganancia')}}
 
-  {{input('alto','Alto')}}
-  {{input('ancho','Ancho')}}
-  {{input('profundo','Profundo')}}
-  <strong>Precio: </strong><span id="precio"></span><br>
+    {{input('alto','Alto')}}
+    {{input('ancho','Ancho')}}
+    {{input('profundo','Profundo')}}
+  </div>
 
   @if (true)
     <h3>Materiales</h3>
