@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+{{ HTML::script('assets/js/jquery.js') }}
+{{ HTML::script('assets/js/bootstrap.min.js') }}
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
     <title>Artecol - @yield('title')</title>
     {{ HTML::style('assets/css/bootstrap-theme.min.css') }}
 	 {{ HTML::style('assets/css/bootstrap.min.css') }}
@@ -25,8 +28,8 @@
   <body>
  
 <!-- scripts
-{{ HTML::script('assets/js/jquery.js') }} -->
-{{ HTML::script('assets/js/bootstrap.min.js') }}
+{{ HTML::script('assets/js/jquery.js') }}
+{{ HTML::script('assets/js/bootstrap.min.js') }} -->
 
 <!-- scripts -->  
     <header>

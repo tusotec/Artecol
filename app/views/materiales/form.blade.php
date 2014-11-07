@@ -20,8 +20,8 @@
   }
 
   function percent () {
-    var desp = v('desperdicio');
-    return (v('flete') + (isFinite(desp)?desp:0)) / 100;
+    var desp = v('material_desperdicio');
+    return (v('material_flete') + (isFinite(desp)?desp:0)) / 100;
   }
 
   function p (data) {
@@ -34,19 +34,19 @@
 
   function update () {
     var val;
-    var precio = v('precio_compra');
+    var precio = v('material-precio_compra');
     switch ($('#tipo option:selected').attr('tipo')) {
       case 'lamina':
-        val = precio /( v('alto') * v('ancho') );
+        val = precio /( v('material-alto') * v('material-ancho') );
         break;
       case 'liquido':
-        val = ( precio / v('cantidad') )/ v('metro');
+        val = ( precio / v('material-cantidad') )/ v('material-metro');
         break;
       case 'paquete':
-        val = precio / v('cantidad');
+        val = precio / v('material-cantidad');
         break;
       case 'metro':
-        val = precio / v('cantidad');
+        val = precio / v('material-cantidad');
         break;
       case 'unidad':
         val = precio;
@@ -56,14 +56,14 @@
         var vincs = $('#compuesto .vinculacion');
         vincs.each(function (i, e) {
           e = $(e);
-          var lv = e.children('select').children('option:selected').attr('costo');
+          var lv = e.find('.vinculaciones-hijo_id').children('option:selected').attr('costo');
           lv = parseFloat(lv);
-          lv *= parseFloat(e.children('input').val());
+          lv *= parseFloat(e.find('.vinculaciones-cantidad').val());
           val += lv;
         });
         break;
     }
-    val = (val * p('desperdicio'))* p('flete');
+    val = (val * p('material-desperdicio'))* p('material-flete');
     $('#costo').val(val);
   }
 
@@ -76,16 +76,16 @@
       section.children().attr('disabled', !value);
       section.toggle(value);
     });
-    $('.flete').attr('disabled', selected == 'compuesto');
-    $('.precio_compra').attr('disabled', selected == 'compuesto');
+    $('.material-flete').attr('disabled', selected == 'compuesto');
+    $('.material-precio_compra').attr('disabled', selected == 'compuesto');
   }
 
   function addVinc () {
     vincNum++;
     var vinc = $('#vincbase').clone();
     vinc.removeAttr('id');
-    vinc.children('select').attr('name', 'vinculaciones['+vincNum+'][hijo_id]');
-    vinc.children('input').attr('name', 'vinculaciones['+vincNum+'][cantidad]');
+    vinc.find('select').attr('name', 'vinculaciones['+vincNum+'][hijo_id]');
+    vinc.find('input').attr('name', 'vinculaciones['+vincNum+'][cantidad]');
     $('#compuesto').append(vinc);
     vinc.toggle(true);
     return vinc;
@@ -108,8 +108,8 @@
     for (var vinc in data) {
       var m_data = data[vinc];
       var mat = addVinc();
-      mat.find('.v-cantidad').val(m_data['cantidad']);
-      mat.find('.v-hijo').val(m_data['hijo_id']);
+      mat.find('.vinculaciones-cantidad').val(m_data['cantidad']);
+      mat.find('.vinculaciones-hijo_id').val(m_data['hijo_id']);
       console.log(m_data);
     }
     update();
@@ -125,6 +125,7 @@
   }
 
   function input ($name, $display, $data = []) {
+    return MyForm::field($name, $display, $data);
     if (!isset($data['value']) || $data['value'] == null) {
       $data['value'] = "";
     }
@@ -146,17 +147,21 @@
 
 
 <div id="vincbase" style="display:none;" class="vinculacion input-row">
+  <?php MyForm::setModel('vinculaciones', true); ?>
   <div class="input-field">
-    <select name="vinculaciones[#id][hijo_id]" onchange="update()" class="v-hijo">
+    <select name="{{MyForm::getName('hijo_id')}}" onchange="update()" class="{{MyForm::getClass('hijo_id')}}">
       @foreach (Material::all() as $mat)
         <option value="{{$mat->id}}" costo="{{$mat->costo}}">{{$mat->nombre}}</option>
       @endforeach
     </select>
   </div>
+  {{MyForm::field('cantidad', 'Cantidad', ['onkeyup' => 'update()'])}}
+  <!--
   <div class="input-field">
     <label for="vinculaciones[#id][cantidad]">Cantidad</label>
     <input name="vinculaciones[#id][cantidad]" type='text' onkeyup="update()" class="v-cantidad">
   </div>
+  -->
   <div class="input-field">
     <button type="button" onclick="delVinc(this)">Quitar</button>
   </div>
@@ -173,6 +178,7 @@
          ?>>{{$categoria->nombre}}</option>
       @endforeach
     </select>
+    <?php MyForm::setModel('material', false) ?>
     {{ input('nombre', 'Nombre') }}
     {{ input('precio_compra','Precio de Compra') }}
     {{ input('flete','% Flete', ['value' => '0', 'onkeyup' => 'update()']) }}

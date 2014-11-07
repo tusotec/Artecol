@@ -18,6 +18,7 @@ class MaterialesController extends \BaseController {
 	public function store()
 	{
 		$data = Input::all();
+		//return json_encode($data);
 		$material = new Material;
 		$material->fill($data['material']);
 		$material->save();
