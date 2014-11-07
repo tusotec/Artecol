@@ -188,8 +188,9 @@
   }
 
   function input ($name, $display, $data = array()) {
-    $data['class'] = $name;
+    //$data['class'] = $name;
     $data['onkeyup'] = 'precio()';
+    return MyForm::field($name, $display, $data);
     $value = Form::getValueAttribute($name);
     $f_name = "modulo[$name]";
     return  '<div class="input-field">' .
@@ -232,7 +233,6 @@
     </select>
   @endforeach
 </div>
-
 <div id="op_p_tipo" style="display: none;">
   <div id="tipo_m2" class="input-row">
     {{matInput('medida_1', 'Alto')}}
@@ -266,6 +266,7 @@
 <h1>Crear Modulo</h1>
 
 {{ Form::model($modulo, ['route' => $form_route, 'onsubmit' => 'return isValid();']) }}
+  <?php MyForm::setModel('modulo', false); ?>
   <div class="input-row">
     {{input('nombre','Nombre')}}
     <div class="input-field">
