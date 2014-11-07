@@ -44,7 +44,13 @@ class MaterialesCategoriasController extends \BaseController {
 	}
 	public function destroy($id)
 	{
+		if ($id == 1) {
+			return 'No se puede eliminar esta categoria';
+		}
 		$categoria = MaterialCategoria::find($id);
+		if ($categoria->materiales()->count() > 0) {
+			return 'No se puede eliminar Categorias con Materiales';
+		}
 		$categoria->delete();
 		return Redirect::route('materiales_categorias.index');
 	}
