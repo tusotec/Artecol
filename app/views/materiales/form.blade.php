@@ -125,6 +125,7 @@
   }
 
   function input ($name, $display, $data = []) {
+    $data['size'] = '10';
     return MyForm::field($name, $display, $data);
     if (!isset($data['value']) || $data['value'] == null) {
       $data['value'] = "";
@@ -155,7 +156,7 @@
       @endforeach
     </select>
   </div>
-  {{MyForm::field('cantidad', 'Cantidad', ['onkeyup' => 'update()'])}}
+  {{MyForm::field('cantidad', 'Cantidad', ['onkeyup' => 'update()', 'size' => '10'])}}
   <!--
   <div class="input-field">
     <label for="vinculaciones[#id][cantidad]">Cantidad</label>
@@ -171,15 +172,17 @@
 
 {{ Form::model($material, ['route' => $form_route, 'onsubmit' => 'return isValid();']) }}
   <div class="input-row">
-    <select id="tipo" name="material[categoria_id]" onchange="changeForm()">
-      @foreach (MaterialCategoria::all() as $categoria)
-        <option value="{{$categoria->id}}" tipo="{{$categoria->tipo}}" <?php 
-        if($material->categoria == $categoria) {echo 'selected';}
-         ?>>{{$categoria->nombre}}</option>
-      @endforeach
-    </select>
     <?php MyForm::setModel('material', false) ?>
     {{ input('nombre', 'Nombre') }}
+    <div class="input-field">
+      <select id="tipo" name="material[categoria_id]" onchange="changeForm()">
+        @foreach (MaterialCategoria::all() as $categoria)
+          <option value="{{$categoria->id}}" tipo="{{$categoria->tipo}}" <?php 
+          if($material->categoria == $categoria) {echo 'selected';}
+           ?>>{{$categoria->nombre}}</option>
+        @endforeach
+      </select>
+    </div>
     {{ input('precio_compra','Precio de Compra') }}
     {{ input('flete','% Flete', ['value' => '0', 'onkeyup' => 'update()']) }}
     {{ input('costo', 'Costo', ['id' => 'costo', 'readonly' => 'readonly'] ) }}
