@@ -5,6 +5,7 @@
 
 {{ HTML::script('assets/js/jquery.js') }}
 {{ HTML::script('assets/js/bootstrap.min.js') }}
+{{ HTML::script('assets/js/scripts.js') }}
     <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
     <title>Artecol - @yield('title')</title>
     {{ HTML::style('assets/css/bootstrap-theme.min.css') }}
@@ -77,7 +78,6 @@
 	
   
     <div id="contenido">
-	  <p>{{json_encode(Input::all())}}</p>
     @if ($errors->any())
       <section id="errores">
         Errores..

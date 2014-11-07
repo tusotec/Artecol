@@ -58,8 +58,8 @@
 
     var gen = obj.find('.general-fields');
 
-    gen.children('#matsel').remove();
-    gen.append(matsel);       //remplazar la lista de materiales
+    gen.find('.matsel').remove();
+    gen.find('.matseldiv').append(matsel);       //remplazar la lista de materiales
 
     obj.children('#tipo').remove();
     obj.append(tipo);         //remplazar la seccion de detalles
@@ -190,6 +190,7 @@
   function input ($name, $display, $data = array()) {
     //$data['class'] = $name;
     $data['onkeyup'] = 'precio()';
+    $data['size'] = '6';
     return MyForm::field($name, $display, $data);
     $value = Form::getValueAttribute($name);
     $f_name = "modulo[$name]";
@@ -202,6 +203,7 @@
   function matInput ($name, $display, $data = array()) {
     $data['class'] = $name;
     $data['onkeyup'] = 'precio()';
+    $data['size'] = '6';
 
     //$name = "material[#id][$name]";
     return  '<div class="input-field">' .
@@ -257,6 +259,7 @@
         @endforeach
       </select>
     </div>
+    <div class="matseldiv input-field"></div>
     {{matInput('cantidad', 'Cantidad')}}
     <button type="button" onclick="removeMat(this)">Quitar</button>
   </div>

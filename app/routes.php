@@ -58,11 +58,22 @@ Route::group(['before' => 'normal'], function () {
 
   Route::get('modulos/categorias', 
     ['uses' => 'ModulosCategoriasController@index', 'as' => 'modulos_categorias.index']);
+  Route::get('modulos/categorias/new', 
+    ['uses' => 'ModulosCategoriasController@create', 'as' => 'modulos_categorias.new']);
   Route::get('modulos/categorias/{id}', 
     ['uses' => 'ModulosCategoriasController@show', 'as' => 'modulos_categorias.show']);
+  Route::get('modulos/categorias/{id}/edit', 
+    ['uses' => 'ModulosCategoriasController@edit', 'as' => 'modulos_categorias.edit']);
+  Route::delete('modulos/categorias/{id}', 
+    ['uses' => 'ModulosCategoriasController@destroy', 'as' => 'modulos_categorias.destroy']);
   Route::post('modulos/categorias', [
     'uses' => 'ModulosCategoriasController@store',
     'as' => 'modulos_categorias.store',
+    'before' => 'admin'
+  ]);
+  Route::post('modulos/categorias/{id}', [
+    'uses' => 'ModulosCategoriasController@update',
+    'as' => 'modulos_categorias.update',
     'before' => 'admin'
   ]);
 
