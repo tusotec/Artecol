@@ -4,36 +4,26 @@
 <h1>Modulo {{$modulo->nombre}}</h1>
 <table id="datos">
   <tr>
-    <th>Precio:</th>
-    <td>{{$modulo->precio()}}</td>
-  </tr>
-  <tr>
     <th>Categoría:</th>
     <td>{{$modulo->categoria->nombre}}</td>
-  </tr>
-  <tr>
     <th>Alto:</th>
-    <td>{{$modulo->alto}}</td>
-  </tr>
-  <tr>
+    <td>{{round($modulo->alto, 2)}}</td>
     <th>Ancho:</th>
-    <td>{{$modulo->ancho}}</td>
-  </tr>
-  <tr>
+    <td>{{round($modulo->ancho, 2)}}</td>
     <th>Profundo:</th>
-    <td>{{$modulo->profundo}}</td>
+    <td>{{round($modulo->profundo, 2)}}</td>
+    <th>Margen:</th>
+    <td>{{round($modulo->ganancia, 2)}}%</td>
   </tr>
   <tr>
-    <th>Ganancia:</th>
-    <td>{{$modulo->ganancia}}%</td>
-  </tr>
-  <tr>
+    <th>Precio:</th>
+    <td>{{precio($modulo->precio())}}</td>
     <th>Medicion:</th>
     <td>{{$modulo->medicion}}</td>
+    <th>Precio Unitario:</th>
+    <td>{{precio($modulo->precioUnitario())}}</td>
   </tr>
   <tr>
-    <th>Precio Unitario:</th>
-    <td>{{$modulo->precioUnitario()}}</td>
   </tr>
 </table>
 <h3>Materiales</h3>
@@ -52,8 +42,8 @@
       <td>{{$vinculacion->nombre()}}</td>
       <td>{{$vinculacion->categoria()}}</td>
       <td>{{$vinculacion->cantidad}}</td>
-      <td>{{$vinculacion->medida_1}}</td>
-      <td>{{$vinculacion->medida_2}}</td>
+      <td>{{round($vinculacion->medida_1, 2)}}</td>
+      <td>{{round($vinculacion->medida_2, 2)}}</td>
       <td>{{precio($vinculacion->precioMaterial())}}</td>
       <td>{{precio($vinculacion->precio())}}</td>
     </tr>
