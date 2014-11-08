@@ -4,7 +4,7 @@ class PresupuestosController extends \BaseController {
 
 	public function index()
 	{
-		$presupuestos = Presupuesto::paginate();
+		$presupuestos = Presupuesto::toShow();
 		$data = array('presupuestos' => $presupuestos);
 		return View::make('presupuestos/index')->with($data);
 	}

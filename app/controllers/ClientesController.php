@@ -4,7 +4,7 @@ class ClientesController extends \BaseController {
 
 	public function index()
 	{
-		$clientes = Cliente::paginate();
+		$clientes = Cliente::toShow();
 		$data = array('clientes' => $clientes);
 		return View::make('clientes/index')->with($data);
 	}

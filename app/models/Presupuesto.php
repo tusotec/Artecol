@@ -1,6 +1,6 @@
 <?php
 
-class Presupuesto extends Eloquent {
+class Presupuesto extends ModelBase {
   protected $table = 'presupuestos';
   protected $fillable = array(
     'fecha', 'precio', 'observaciones'

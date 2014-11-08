@@ -4,8 +4,7 @@ class MaterialesController extends \BaseController {
 
 	public function index()
 	{
-		$order = Input::get('order', 'nombre');
-		$materiales = Material::paginate($order);
+		$materiales = Material::toShow();
 		return View::make('materiales/index')->with('materiales', $materiales);
 	}
 

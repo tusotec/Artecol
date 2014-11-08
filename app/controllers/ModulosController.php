@@ -4,8 +4,7 @@ class ModulosController extends \BaseController {
 
 	public function index()
 	{
-		$order = Input::get('order', 'nombre');
-		$modulos = Modulo::paginate($order);
+		$modulos = Modulo::toShow();
 		return View::make('modulos/index')->with('modulos', $modulos);
 	}
 	public function create()

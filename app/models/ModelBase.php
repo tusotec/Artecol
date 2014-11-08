@@ -5,7 +5,7 @@ class ModelBase extends Eloquent {
   protected static $search_order = 'id';
   protected static $search_key = 'nombre';
 
-  public static function paginate () {
+  public static function toShow () {
     $order_dir = Input::has('order') ? 'asc' : 'desc';
     $order = Input::get('order', static::$search_order);
     $perPage = Config::get('artecol.per_page');
