@@ -12,8 +12,8 @@
   </tr>
   @foreach ($categorias as $categoria) 
     <tr>
-      <?php $link = route('materiales_categorias.show', $categoria->id); 
-            $edit = route('materiales_categorias.edit', $categoria->id); 
+      <?php $link = route('materiales.index', ['searchvalue' => $categoria->id, 'searchkey' => 'categoria_id']); 
+            $edit = route('materiales_categorias.edit', $categoria->id);
             $destroy = ['materiales_categorias.destroy', $categoria->id]; ?>
       <td>{{link_to($link, $categoria->nombre)}}</td>
       <td>{{$categoria->tipo}}</td>
