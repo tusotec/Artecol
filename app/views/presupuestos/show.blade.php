@@ -11,13 +11,29 @@
     }
     table, td, th {
       padding: 5px;
-      border: 1px solid lightgray;
-      border-collapse: collapse;
+      border: 1px solid #ccc;
+      border-collapse: collapse;t
     }
     #encabezado {
-      background-color: red;
-      height: 50px;
+      background-color: green;
+      height: 100px;
+	  background-image: url(header.png);
     }
+	#data_superior ,  #data_superior #id , #data_superior #fecha {
+	padding: 2px;
+      border: 0px solid #ccc;
+	}
+	#data_superior #id{
+	width: 50px;
+	float: left;
+	
+	}
+	 #data_superior #fecha {
+	 width: 500px;
+	 float: left;
+	 
+	 }
+	
   </style>
 </head>
 <body>
