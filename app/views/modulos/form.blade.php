@@ -291,7 +291,7 @@
       </select> Medicion
     </div>
     <div class="input-field">
-      <strong>Precio: </strong><span id="precio"></span><br>
+      <strong> &nbsp  &nbsp  &nbsp Precio: </strong><span id="precio"></span><br>
     </div>
   </div>
 
