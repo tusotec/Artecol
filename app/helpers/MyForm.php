@@ -76,4 +76,32 @@ class MyForm{
             '</div>';
   }
 
+  public static function select ($name, $data = array(), $options = array()) {
+
+    $value = Form::getValueAttribute($name);
+
+    //Si el modelo ya tiene este atributo se le da importancia.
+    if ($value != null) {
+      $options['value'] = $value;
+    }
+    $full_name = self::getName($name);
+    $id = self::getClass($name);
+
+    
+    if (isset($options['class']) && $options['class'] != '') {
+      //Si ya tiene clase se añade la generada a la lista de clases
+      $options['class'] = $options['class'] . ' ' . $id;
+    } else {
+      //Si no se usa esta clase como única
+      $options['class'] = $id;
+    }
+
+    if (!self::$is_array && !isset($options['id'])) {
+      //Si el modelo es unico y no existe id.
+      $options['id'] = $id;
+    }
+
+    return Form::select($full_name, $data, null, $options);
+  }
+
 }

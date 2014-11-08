@@ -1,5 +1,15 @@
 @extends ('layout')
 
+<?php 
+  $categorias_data = MaterialCategoria::all()->map(function ($categoria) {
+    return array(
+      'value' => $categoria->id,
+      'text' => $categoria->nombre,
+      'tipo' => $categoria->tipo
+    );
+  });
+ ?>
+
 @section ('header')
 <script type="text/javascript">
 
@@ -9,6 +19,7 @@
     changeForm();
     $('input').on('keyup',update);
     init();
+    populateSelect($('#tipo'), {{json_encode($categorias_data)}});
   });
   //m = Material
   function m (data) {
@@ -127,17 +138,6 @@
   function input ($name, $display, $data = []) {
     $data['size'] = '10';
     return MyForm::field($name, $display, $data);
-    if (!isset($data['value']) || $data['value'] == null) {
-      $data['value'] = "";
-    }
-    $r_val = Form::getValueAttribute($name);
-    $data['value'] = ($r_val == null) ? $data['value'] : $r_val;
-    $data['class'] = $name;
-    $name = "material[$name]";
-    return  '<div class="input-field">' .
-            Form::label($name, $display) .
-            Form::text($name, $data['value'], $data) .
-            '</div>';
   }
 ?>
 
@@ -175,13 +175,12 @@
     <?php MyForm::setModel('material', false) ?>
     {{ input('nombre', 'Nombre') }}
     <div class="input-field">
-      <select id="tipo" name="material[categoria_id]" onchange="changeForm()">
-        @foreach (MaterialCategoria::all() as $categoria)
-          <option value="{{$categoria->id}}" tipo="{{$categoria->tipo}}" <?php 
-          if($material->categoria == $categoria) {echo 'selected';}
-           ?>>{{$categoria->nombre}}</option>
-        @endforeach
-      </select>
+      {{MyForm::label('categoria_id', 'Categoría')}}
+      {{MyForm::select('categoria_id', [], [
+        'id' => 'tipo',
+        'selecteditem' => $material->categoria_id,
+        'onchange' => 'changeForm();'
+      ])}}
     </div>
     {{ input('precio_compra','Precio de Compra') }}
     {{ input('flete','% Flete', ['value' => '0', 'onkeyup' => 'update()']) }}
