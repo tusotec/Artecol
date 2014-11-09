@@ -26,11 +26,12 @@
 	#data_superior #id{
 	width: 50px;
 	float: left;
-	
+	 #data_superior #fecha 
 	}
 	 #data_superior #fecha {
 	 width: 500px;
 	 float: left;
+	 padding: 0px;
 	 
 	 }
 	
