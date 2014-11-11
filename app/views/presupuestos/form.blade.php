@@ -24,7 +24,7 @@
     var modulo = parent.find('#m_sel option:selected');
     setMedidas(parent, modulo.attr('medicion'));
     var val = parseFloat(modulo.attr('precio'));
-    val *= parseFloat(parent.find('#m_cant').val());
+    val *= value(parent.find('#m_cant'));
     val *= getMedida(parent, 'alto');
     val *= getMedida(parent, 'ancho');
     val *= getMedida(parent, 'profundo');
@@ -34,9 +34,9 @@
     var precio = 0;
     $('#modulos .modulo_div').each(function (i, e) {
       e = $(e);
-      precio += parseFloat(e.find('#m_precio').val());
+      precio += value(e.find('#m_precio'));
     });
-    $('#p_precio').val(precio);
+    value($('#p_precio'), precio);
   }
 
   function getMedida(obj, medida) {
@@ -44,7 +44,7 @@
     if (med.attr('disabled')) {
       return 1;
     }
-    return parseFloat(med.val());
+    return value(med);
   }
 
   function setMedidas (obj, medicion) {

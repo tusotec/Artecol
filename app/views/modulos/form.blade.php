@@ -96,13 +96,12 @@
 
   function set_val (name, e, val) {
     name = '[name*="x"]'.replace('x', name);
-    e.find(name).val(val);
+    value(e.find(name), val);
   }
 
   function val_or_none (name, e) {
     name = '[name*="x"]'.replace('x', name);
-    val = e.find(name).val();
-    val = parseFloat(val);
+    val = value(e.find(name));
     return val;
   }
 
@@ -126,7 +125,7 @@
       val += lval;
     });
     val += val * percent();
-    $('#precio').text(val.toFixed(2));
+    value('#precio2', val);
   }
 
   function isValid () {
@@ -149,9 +148,12 @@
     selcat(mat.find('#catsel'));
     mat.find('.matsel').val(data['material_id']);
 
-    mat.find('.cantidad').val(data['cantidad'])
+    value(mat.find('.cantidad'), data['cantidad']);
+    value(mat.find('.medida_1'), data['medida_1']);
+    value(mat.find('.medida_2'), data['medida_2']);
+    /*mat.find('.cantidad').val(data['cantidad'])
     mat.find('.medida_1').val(data['medida_1'])
-    mat.find('.medida_2').val(data['medida_2'])
+    mat.find('.medida_2').val(data['medida_2'])*/
     mat.find('.id').val(data['id'])
   }
 
@@ -290,6 +292,7 @@
         @endforeach
       </select> Medicion
     </div>
+    {{input('precio', 'Precio', ['disabled' => true, 'id' => 'precio2'])}}
     <div class="input-field">
       <strong> &nbsp  &nbsp  &nbsp Precio: </strong><span id="precio"></span><br>
     </div>

@@ -14,12 +14,13 @@
 <script type="text/javascript">
 
   var vincNum = 0;
-
   $().ready(function(){
     changeForm();
     $('input').on('keyup',update);
     init();
     populateSelect($('#tipo'), {{json_encode($categorias_data)}});
+    update();
+    changeForm();
   });
   //m = Material
   function m (data) {
@@ -27,7 +28,7 @@
   }
   //v = Value
   function v (data) {
-    return parseFloat(m(data).val());
+    return value(m(data));
   }
 
   function percent () {
@@ -66,6 +67,7 @@
         val = 0;
         var vincs = $('#compuesto .vinculacion');
         vincs.each(function (i, e) {
+          console.log(i);
           e = $(e);
           var lv = e.find('.vinculaciones-hijo_id').children('option:selected').attr('costo');
           lv = parseFloat(lv);
@@ -75,7 +77,7 @@
         break;
     }
     val = (val * p('material-desperdicio'))* p('material-flete');
-    $('#costo').val(val);
+    value('#costo', val);
   }
 
   function changeForm () {

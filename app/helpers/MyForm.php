@@ -40,6 +40,11 @@ class MyForm{
   public static function input ($type, $name, $options = array()) {
     $value = Form::getValueAttribute($name);
 
+    //Si el valor es un numero, redondear 5 decimales.
+    if (is_numeric($value)) {
+      $value = round($value, 5);
+    }
+
     //Si el modelo ya tiene este atributo se le da importancia.
     if ($value != null) {
       $options['value'] = $value;
